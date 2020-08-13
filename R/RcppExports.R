@@ -3,6 +3,6 @@
 
 #' @backref src/rcpp_iriscem.cpp
 .main <- function(str) {
-    .Call('_IRISCEM_qubic', PACKAGE = 'IRISCEM', str)
+    .Call('_IRISFGM_qubic', PACKAGE = 'IRISFGM', str)
 }
 

@@ -1,0 +1,30 @@
+Package: IRISCEM
+Type: Package
+Title: IRISCEM for Comprehensive analysis based on single-cell RNA-Seq
+Version: 1.0
+Date: 2019-02-15
+Author: Yuzhou Chang
+Maintainer: Yuzhou Chang <yuzhou.chang@osumc.edu>
+Description: One paragraph description of what the package does as one or more full sentences.
+License: MIT
+Imports: Rcpp (>= 1.0.0), MCL, anocva, igraph
+LinkingTo: Rcpp
+RoxygenNote: 7.1.1
+Collate: 
+    'Classes.R'
+    'generics.R'
+    'AddMeta.R'
+    'Bicluster.R'
+    'Bric.R'
+    'CellTypePrediction.R'
+    'DifferentialGene.R'
+    'DimensionReducntionBasedOnLTMG.R'
+    'EnrichPathway.R'
+    'InputData.R'
+    'LTMGSCA.R'
+    'LTMG.R'
+    'Object.R'
+    'PlotHeatmap.R'
+    'PlotNetwork.R'
+    'PreprocessData.R'
+    'RcppExports.R'

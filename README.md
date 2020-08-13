@@ -11,9 +11,9 @@ We recommend user to install IRIS-FGM on large memory (32GB) based UNIX/Linux op
 We will assum you have the following installed:
 R (equal or greater than 3.5)
 
-#Usage
+# Usage
 
-##1. Pre-installation
+## Pre-installation
 1. Install required packages from CRAN. 
 
 ```install.packages(c('BiocManager','devtools', 'AdaptGauss', "pheatmap", 'mixtools','MCL', 'anocva', 'qgraph','Rtools','ggpubr',"ggraph","Seurat"))```

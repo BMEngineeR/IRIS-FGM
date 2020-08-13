@@ -22,7 +22,7 @@ extern "C" void my_function_to_handle_aborts(int signal_number) {
   // stop("abort()");
 }
 
-//' @backref src/rcpp_iriscem.cpp
+//' @backref src/rcpp_irisfgm.cpp
 // [[Rcpp::export(.main)]]
 int qubic(const CharacterVector& str) {
   // may treat abort() more friendly, see http://stackoverflow.com/a/3911102

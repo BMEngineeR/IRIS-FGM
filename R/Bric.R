@@ -21,7 +21,7 @@ qubic <- function(i = NULL, N = FALSE, R = FALSE, Fa = FALSE, d = FALSE, D = FAL
   vec <- c(vec, "-c", as.character(c))
   vec <- c(vec, "-o", as.character(o))
 
-  unloadNamespace("IRISCEM")
+  unloadNamespace("IRISFGM")
   ret <- .main(vec)
   if(ret == 42) return(IRISCEM::qubic(paste0(i, ".chars"), d = TRUE))
   # return (ret)
@@ -29,7 +29,7 @@ qubic <- function(i = NULL, N = FALSE, R = FALSE, Fa = FALSE, d = FALSE, D = FAL
 
 
 .onUnload <- function (libpath) {
-  library.dynam.unload("IRISCEM", libpath)
+  library.dynam.unload("IRISFGM", libpath)
 }
 
 

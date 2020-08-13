@@ -3,13 +3,14 @@
 NULL
 
 #' Create addmeta function for adding meta information
-#'
-#' @param object BRIC object
+#' 
+#' This function can import cell annotation information to IRIS-FGM object.
+#' @param object input IRIS-FGM object
 #' @param meta.info meta information table should be a data frame with rows representing cell and coloumn representing different group condition
 #'
-#' @return
+#' @return It will add meta informatoin to IRISFGM.
 #' @name AddMeta
-#' @examples
+#' @examples \dontrun{AddMeta(object, meta.info = my.meta)}  
 .addMeta <- function(object = NULL, meta.info = NULL){
   if(is.null(meta.info)){
     message("Do not provide meta info table for the object.")
@@ -38,9 +39,11 @@ NULL
 setMethod("AddMeta", "BRIC", .addMeta)
 
 #' Plot violin plot based on meta data.
+#' 
+#' This function can plot figure based on numebr total count information and 
 #' @import ggplot2
 #' @importFrom  ggpubr ggarrange
-#' @param object
+#' @param object 
 #' @name PlotMeta
 #' @return
 #'

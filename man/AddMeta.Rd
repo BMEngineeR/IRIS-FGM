@@ -4,7 +4,8 @@
 \alias{AddMeta}
 \alias{.addMeta}
 \alias{AddMeta,BRIC-method}
-\title{Create addmeta function for adding meta information}
+\title{Create addmeta function for adding meta information
+This function can import cell annotation information to IRIS-FGM object.}
 \usage{
 AddMeta(object, ...)
 
@@ -18,8 +19,12 @@ AddMeta(object, ...)
 \item{meta.info}{meta information table should be a data frame with rows representing cell and coloumn representing different group condition}
 }
 \value{
-
+It will reture a quality control figure
 }
 \description{
 Create addmeta function for adding meta information
+This function can import cell annotation information to IRIS-FGM object.
+}
+\examples{
+\dontrun{AddMeta(object, meta.info = my.meta)}  
 }

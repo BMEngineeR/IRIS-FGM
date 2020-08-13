@@ -1,7 +1,7 @@
 ---
-title: "IRIS-CEM vignette"
-subtitle: IRIS-CEM 
-abstract: IRIS-CEM, integrative and interpretation system for co-expression module analysisa biclustering-based gene regulation inference and cell type prediction method for single-cell RNA-Seq data. This R package integrates in-house computational tools and provides two types of analysis, including QUBIC2 based co-expression analysis and LTMG (left-truncated mixture Gaussian model) based scRNA-Seq analysis (quick mode). BRICIRIS-CEM contains fourfour  major steps; (i) data preprocessing and regulatory signal modelingd LTMG modeling; (ii) co-regulated expression gene module identification; (iii) cell clustering; (iv) co-expression module and differentially expressed gene analysis. 
+title: "IRIS-FGM vignette"
+subtitle: IRIS-FGM 
+abstract: IRIS-FGM, integrative and interpretation system for co-expression module analysisa biclustering-based gene regulation inference and cell type prediction method for single-cell RNA-Seq data. This R package integrates in-house computational tools and provides two types of analysis, including QUBIC2 based co-expression analysis and LTMG (left-truncated mixture Gaussian model) based scRNA-Seq analysis (quick mode). IRIS-FGM contains fourfour  major steps; (i) data preprocessing and regulatory signal modelingd LTMG modeling; (ii) co-regulated expression gene module identification; (iii) cell clustering; (iv) co-expression module and differentially expressed gene analysis. 
 author: Yuzhou Chang
 date: "12 Aug, 2020"
 output:
@@ -17,18 +17,18 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(root.dir = "d:/my_analysis/BRIC_TEST/2.Yan/")
-library(BRIC)
+library(IRISFGM)
 load("d:/my_analysis/BRIC_TEST/2.Yan/YanObjectBRIC_qubic1.Rdata")
 ```
 
-# Intorduction to IRIS-CEM
+# Intorduction to IRIS-FGM
 
 ## General introduction 
-IRIS-CEM integrates in-house and state-of-the-art computational tools and provides two analysis strategies, including bicluster-based co-expression gene analysis [(Xie, et al., 2020)](https://academic.oup.com/bioinformatics/article-abstract/36/4/1143/5567116?redirectedFrom=fulltext) and LTMG (left-truncated mixture Gaussian model)-embedded scRNA-Seq analysis [(Wan, et al., 2019)](https://academic.oup.com/nar/article/47/18/e111/5542876).
+IRIS-FGM integrates in-house and state-of-the-art computational tools and provides two analysis strategies, including bicluster-based co-expression gene analysis [(Xie, et al., 2020)](https://academic.oup.com/bioinformatics/article-abstract/36/4/1143/5567116?redirectedFrom=fulltext) and LTMG (left-truncated mixture Gaussian model)-embedded scRNA-Seq analysis [(Wan, et al., 2019)](https://academic.oup.com/nar/article/47/18/e111/5542876).
 
 ## Main function
 
-The main idea of IRIS-CEM consists of two major strategies: 
+The main idea of IRIS-FGM consists of two major strategies: 
 
 * (i)  biclustering 
 * (ii) quick mode (cluster) 
@@ -62,7 +62,7 @@ The computational frame is constructed under the S4 data structure in R. The str
 # Requirements
 ## Environment
 
-We recommend user to install IRIS-CEM on large memory (32GB) based linux operation system if user aims at analyzing bicluster-based co-expression analysis; if user aims at analyzing data by quick mode, we recommend to install IRIS-CEM on small memeory (8GB) based Windows or linux operation system; IRIS-CEM does not support MAC. 
+We recommend user to install IRIS-FGM on large memory (32GB) based linux operation system if user aims at analyzing bicluster-based co-expression analysis; if user aims at analyzing data by quick mode, we recommend to install IRIS-FGM on small memeory (8GB) based Windows or linux operation system; IRIS-FGM does not support MAC. 
 We will assum you have the following installed:
 
 * R (equal or greater than 3.5)
@@ -77,17 +77,17 @@ devtools::install_github(repo = 'satijalab/seurat')
 ```
 ## Input
 
-1. The input to IRIS-CEM is the single-cell RNA-seq expression matrix:
+1. The input to IRIS-FGM is the single-cell RNA-seq expression matrix:
 
 + Rows correspond to genes and columns correspond to cells.
 + Expression units: the preferred expression values are RPKM/FPKM/CPM. 
 + The data file should be tab delimited.
 
-2. IRIS-CEM also accepts output files from 10X CellRanger, includinhg a folder which contains three individual files and h5 file. 
+2. IRIS-FGM also accepts output files from 10X CellRanger, includinhg a folder which contains three individual files and h5 file. 
 
 ## Others
 
-When you perform co-expression analysis, it will output several intermediate files, thus please make sure that you have write permission to the folder where IRIS-CEM is located. 
+When you perform co-expression analysis, it will output several intermediate files, thus please make sure that you have write permission to the folder where IRIS-FGM is located. 
 
 # Installation
 
@@ -109,14 +109,14 @@ The original expression matrix was downloaded from <https://s3.amazonaws.com/scr
 
 # 1. Input data, create IRISCEM object, add meta information, and preprocessing. 
 
-IRIS-CEM can accepted 10X chromium input files, including a folder (contain gene name, cell name, and sparse matrix) and .h5 file.
+IRIS-FGM can accepted 10X chromium input files, including a folder (contain gene name, cell name, and sparse matrix) and .h5 file.
 
 ## Input data
 
 1. set working directory and import library
 ```{r setwd, eval =FALSE, echo = TRUE}
 setwd("~/2.Yan/")
-library(IRISCEM)
+library(IRISFGM)
 ```
 2. Read from .h5 file.
 
@@ -139,7 +139,7 @@ InputMatrix <- read.table("~/2.Yan/Yan_expression.txt",header = T, row.names = 1
 
 ## Add meta information
 
-1. Create IRIS-CEM object.
+1. Create IRIS-FGM object.
 
 ```{r create_object, eval= FALSE, echo = TRUE,message=FALSE}
 object <- CreateIRISCEMObject(InputMatrix)
@@ -205,7 +205,7 @@ This function need user to input group that is used to plot on the figure. Input
 
 # 4. Biclustering based co-expression analysis
 
-IRIS-CEM can provide biclustering function, which is based on our in-house novel algorithm, QUBIC2 (<https://github.com/maqin2001/qubic2>). Here we will show the basic biclustering usage of IRIS-CEM using a $200\times 88$ expression matrix generated from previous top 500 variant genes. However, we recommend user should use `Gene_use = all` to generate LTMG matrix. 
+IRIS-FGM can provide biclustering function, which is based on our in-house novel algorithm, QUBIC2 (<https://github.com/maqin2001/qubic2>). Here we will show the basic biclustering usage of IRIS-FGM using a $200\times 88$ expression matrix generated from previous top 500 variant genes. However, we recommend user should use `Gene_use = all` to generate LTMG matrix. 
 
 ## LTMG-discretized bicluster (recommend for small single cell RNA-seq data)
 User can type the following command to run discretization (LTMG) + biclustering directly:
@@ -227,11 +227,11 @@ object <- RunBicluster(object, DiscretizationModel = "Quantile",OpenDual = TRUE,
                           NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)
 ```
 
-(The default parameters in IRIS-CEM are BlockCellMin=15, BlockOverlap=0.7, Extension=0.90, NumBlockOutput=100 you may use other parameters as you like, just specify them in the argument)
+(The default parameters in IRIS-FGM are BlockCellMin=15, BlockOverlap=0.7, Extension=0.90, NumBlockOutput=100 you may use other parameters as you like, just specify them in the argument)
 
 ## Cell type prediction based on Markove clustering
 
-The cell type prediction of IRIS-CEM is based on the biclustering results. In short, it will construct a weighted graph based on the biclusters and then do clustering on the weighted graph. Currently, we provide two commonly used clustering method: MCL .
+The cell type prediction of IRIS-FGM is based on the biclustering results. In short, it will construct a weighted graph based on the biclusters and then do clustering on the weighted graph. Currently, we provide two commonly used clustering method: MCL .
 
 
 ```{r cell_type, eval=TRUE, echo =TRUE}
@@ -257,7 +257,7 @@ object <- FindMarkers(object)
 User need to select cell type to compare, while here we select `4:Suerat0.5` as cell type category to analyze.
 ![markergene](D:/my_analysis\\BRIC_TEST\\figures\\LTMG\\markergebe_selection.png)
 
-Then IRIS-CEM will ask user choose a first group as reference, while here we select the third group (`3 : 2`) marked as cluster 2 in umap.
+Then IRIS-FGM will ask user choose a first group as reference, while here we select the third group (`3 : 2`) marked as cluster 2 in umap.
 ![markergene](D:/my_analysis\\BRIC_TEST\\figures\\LTMG\\markergene_1stGroup.png)
 
 Then user requires to select the second group as compared object, while here user can choose either one group (`2 : 1`, `3 : 2`), or rest of all groups (`4 : rest of all`). 

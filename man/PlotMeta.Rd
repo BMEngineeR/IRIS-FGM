@@ -12,9 +12,12 @@ PlotMeta(object, ...)
 
 \S4method{PlotMeta}{BRIC}(object = NULL)
 }
+\arguments{
+\item{object}{}
+}
 \value{
 
 }
 \description{
-Plot violin plot based on meta data.
+This function can plot figure based on numebr total count information and
 }

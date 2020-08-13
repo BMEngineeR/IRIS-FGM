@@ -21,3 +21,13 @@ R (equal or greater than 3.5)
 2. Install required package from Bioconductor.  
 
 ```BiocManager::install(c('org.Mm.eg.db','multtest','org.Hs.eg.db','clusterProfiler','DEsingle', 'DrImpute','scater', 'scran'))```
+
+3. Install IRIS-FGM from github.
+
+```devtools::install_github("BMEngineeR/IRIS-FGM", force = T)```
+
+Now the MetaQUBIC is successfully installed and ready for use. 
+***
+## Data preparation
+
+1. download example data from [Yan's RPKM 90 cell embroyonic single cell RNA-Seq data](https://github.com/zy26/BRICdata/blob/master/Example%20data/Yan_RPKM)

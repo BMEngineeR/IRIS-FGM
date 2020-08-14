@@ -6,7 +6,7 @@ IRIS-CEM provides an R environment for integrating [LTMG](https://academic.oup.c
 Single-cell RNA-Seq data is useful in discovering cell heterogeneity and signature genes in specific cell populations in cancer and other complex diseases. Specifically, the investigation of functional gene modules (FGM) can help to understand gene interactive networks and complex biological processes. QUBIC2 is recognized as one of the most efficient and effective tools for FGM identification from scRNA-Seq data. However, its availability is limited to a C implementation, and its applicative power is affected by only a few downstream analyses functionalities. We developed an R package named IRIS-FGM (integrative scRNA-Seq interpretation system for functional gene module analysis) to support the investigation of FGMs and cell clustering using scRNA-Seq data. Empowered by QUBIC2, IRIS-FGM can identify co-expressed and co-regulated FGMs, predict types/clusters, identify differentially expressed genes, and perform functional enrichment analysis. It is noteworthy that IRIS-FGM also applies Seurat objects that can be easily used in the Seurat vignettes.
 
 ## Workflow
-<img src="https://user-images.githubusercontent.com/26455910/90200476-f64ff900-dda5-11ea-902c-c91726c22eac.jpg" alt="IRISFGM_working_flow" width="400" height="700">
+<img src="https://user-images.githubusercontent.com/26455910/90200476-f64ff900-dda5-11ea-902c-c91726c22eac.jpg" alt="IRISFGM_working_flow">
 
 ## Environment
 
@@ -139,26 +139,56 @@ PlotHeatmap(object,N.bicluster = c(20,35),show.annotation = F)
 
 3. Visualize local co-expression gene module network: 
 
-Since we already know the bicluster 20 and bicluster 35 showing the difference in global level. Then we will focus on a local gene module and investigate co-expression gene network with in the module. 
-Yellow nodes represent the gene module network from bicluster #1. The size of the nodes indicates the degree of presence (the number of connected edges for one node). The thickness of edges indicates the value of the correlation coefficient. From this figure, we can tell EIFAD gene show negative correlation (red color edge) to GOSR1 & BBS5, and show positive correlation (grey edge) to ZNF394 & POTEM.
-```
-PlotModuleNetwork(object, N.bicluster = 1, cutoff=0.6, Node.color = "#E8E504")
-```
-<img src="https://user-images.githubusercontent.com/26455910/90256029-1a95ef00-de13-11ea-87a4-a4302396df8e.png" alt="metadata" width="900" height="700">
+Since we already know the bicluster 20 and bicluster 35 showing the difference at the global level. We then will focus on a local gene module and investigate the co-expression gene network with in the module. Yellow nodes represent the gene module network from bicluster #20. The nodes' size indicates the degree of presence (the number of connected edges for one node). The thickness of edges suggests the value of the correlation coefficient. 
 
+3.1 From this figure (bicluster 20, click the figure for zooming in), we can tell the EIFAD gene show a negative correlation (red color edge) to GOSR1 & BBS5, and show a positive correlation (grey edge) to ZNF394 & POTEM.
+```
+PlotModuleNetwork(object, N.bicluster = 20, cutoff=0.6, Node.color = "#E8E504")
+```
+<img src="https://user-images.githubusercontent.com/26455910/90256029-1a95ef00-de13-11ea-87a4-a4302396df8e.png" alt="metadata" width="600" height="400">
 
+3.2 From this figure (bicluster 35, click the figure for zooming in), we can tell the ROBO1 gene shows a negative correlation (red color edge) to NLRP4 & BPGM. GNPDA2 gene shows a positive correlation to BPGM, KIT, and CCDC25.
+```
+PlotModuleNetwork(object, N.bicluster = 35, cutoff=0.6, Node.color = "#E8E504")
+```
+<img src="https://user-images.githubusercontent.com/26455910/90259954-d6a5e880-de18-11ea-8ade-8d822fde3053.png" alt="metadata" width="600" height="400">
 
 4. Functional enrichment analysis.
 
-ISIR-FGM provide a functional enrichment analysis for gene module. 
+ISIR-FGM provide a functional enrichment analysis for a selected gene module. 
 
-1. For gene module from bicluster 1. 
+1. For gene module from bicluster 20: 
 
+```
+object <- RunPathway(object ,module.number =20, selected.gene.cutoff = 0.05, species = "Human", database = "GO", genes.source = "Bicluster")
 ```
 
 
+|            | ONTOLOGY | ID         | Description                   | GeneRatio | BgRatio  | pvalue               | p.adjust           | qvalue             | geneID          | Count |
+|------------|----------|------------|-------------------------------|-----------|----------|----------------------|--------------------|--------------------|-----------------|-------|
+| GO:0008278 | CC       | GO:0008278 | cohesin complex               | 2/34      | 16/19717 | 0.000341142521037922 | 0.0313851119354888 | 0.0280095964641662 | STAG3L3/STAG3L2 | 2     |
+| GO:0005689 | CC       | GO:0005689 | U12-type spliceosomal complex | 2/34      | 27/19717 | 0.000986050510033922 | 0.0453583234615604 | 0.0404799683066557 | ZMAT5/SNRNP35   | 2     |
+| GO:0000062 | MF       | GO:0000062 | fatty-acyl-CoA binding        | 2/32      | 22/17697 | 0.000715377512795969 | 0.0470414266188569 | 0.038513448693801  | ACBD5/SOAT2     | 2     |
+| GO:1901567 | MF       | GO:1901567 | fatty acid derivative binding | 2/32      | 28/17697 | 0.00116271921939764  | 0.0470414266188569 | 0.038513448693801  | ACBD5/SOAT2     | 2     |
+| GO:0005484 | MF       | GO:0005484 | SNAP receptor activity        | 2/32      | 31/17697 | 0.001425497776329    | 0.0470414266188569 | 0.038513448693801  | STX11/GOSR1     | 2     |
 
 
+2. For gene module from bicluster 35: 
+
+```
+object <- RunPathway(object ,module.number =35, selected.gene.cutoff = 0.05, species = "Human", database = "GO", genes.source = "Bicluster")
+```
+
+|            | ONTOLOGY | ID         | Description                                                  | GeneRatio | BgRatio   | pvalue               | p.adjust           | qvalue             | geneID                            | Count |
+|------------|----------|------------|--------------------------------------------------------------|-----------|-----------|----------------------|--------------------|--------------------|-----------------------------------|-------|
+| GO:0001667 | BP       | GO:0001667 | ameboidal-type cell migration                                | 6/29      | 461/18670 | 6.43045336163777e-05 | 0.0376874533879247 | 0.0301960094109077 | ROBO1/PTPRG/ERBB4/KIT/PTPRR/HDAC9 | 6     |
+| GO:0021889 | BP       | GO:0021889 | olfactory bulb interneuron differentiation                   | 2/29      | 12/18670  | 0.000152281291259449 | 0.0376874533879247 | 0.0301960094109077 | ROBO1/ERBB4                       | 2     |
+| GO:0010631 | BP       | GO:0010631 | epithelial cell migration                                    | 5/29      | 351/18670 | 0.000186973532900314 | 0.0376874533879247 | 0.0301960094109077 | ROBO1/PTPRG/KIT/PTPRR/HDAC9       | 5     |
+| GO:0090132 | BP       | GO:0090132 | epithelium migration                                         | 5/29      | 354/18670 | 0.000194519550646714 | 0.0376874533879247 | 0.0301960094109077 | ROBO1/PTPRG/KIT/PTPRR/HDAC9       | 5     |
+| GO:0090130 | BP       | GO:0090130 | tissue migration                                             | 5/29      | 360/18670 | 0.000210309449709401 | 0.0376874533879247 | 0.0301960094109077 | ROBO1/PTPRG/KIT/PTPRR/HDAC9       | 5     |
+| GO:0042692 | BP       | GO:0042692 | muscle cell differentiation                                  | 5/29      | 385/18670 | 0.000286907770833753 | 0.0428448937778404 | 0.0343282631067754 | KIT/SYNE1/TMOD2/UCHL1/HDAC9       | 5     |
+| GO:0005001 | MF       | GO:0005001 | transmembrane receptor protein tyrosine phosphatase activity | 2/32      | 17/17697  | 0.000423558866693072 | 0.0222368405013863 | 0.0164965032290986 | PTPRG/PTPRR                       | 2     |
+| GO:0019198 | MF       | GO:0019198 | transmembrane receptor protein phosphatase activity          | 2/32      | 17/17697  | 0.000423558866693072 | 0.0222368405013863 | 0.0164965032290986 | PTPRG/PTPRR                       | 2     |
 
 
 

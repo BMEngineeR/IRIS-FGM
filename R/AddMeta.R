@@ -38,16 +38,16 @@ NULL
 #' @export
 setMethod("AddMeta", "BRIC", .addMeta)
 
-#' Plot violin plot based on meta data.
+#' Generate violin plot based on meta data.
 #' 
-#' This function can plot figure based on numebr total count information and 
+#' This function can plot figure based on numebr total count information and this step is for the quality control. we shoud exclude extreme value in data.
 #' @import ggplot2
 #' @importFrom  ggpubr ggarrange
-#' @param object 
+#' @param object input IRIS-FGM object
 #' @name PlotMeta
-#' @return
+#' @return It will generate two violin plots regarding number of RNA count and identified gene number.
 #'
-#' @examples
+#' @examples \dontrun{PlotMeta(object)}
 .plotMeta <- function(object = NULL) {
   if(is.null(object@MetaInfo)){stop("Can not find meta data, please run AddMeta")}
   my.data <-data.frame(row.names = rownames(object@MetaInfo),RNA_count = object@MetaInfo$ncount_RNA,
@@ -68,18 +68,22 @@ setMethod("AddMeta", "BRIC", .addMeta)
 #' @export
 setMethod("PlotMeta", "BRIC", .plotMeta)
 
-#' Title subset data by number of count and numebr of features.
+#' Subset data by number of count and numebr of gene.
+#' 
+#' This function is used for filtering out low-quality data based on previous result generated from \code{\link{PlotMeta}}
 #'
-#' @param object
+#' @param object input IRIS-FGM object
 #' @param nFeature.upper select upper limit for number of feature
 #' @param nFeature.lower select lower limit for number of feature
 #' @param Counts.upper select upper limit for number of UMI counts
 #' @param Counts.lower select lower limit for number of UMI counts
-#' @name SubsetData
-#' @return
+#' @name SubsetData 
+#' @return it will filter out some cell regarding threshhold.
 #' @export
 #'
-#' @examples
+#' @examples # Use Yan's data which posts on github tutorial
+#' \dontrun{ object <- SubsetData(object, nFeature.upper=15000,nFeature.lower=8000, Counts.upper=700000,Counts.lower=400000)}
+#' 
 .subset_data <-  function(object,
                          nFeature.upper=Inf,nFeature.lower=-Inf,
                          Counts.upper=Inf,Counts.lower=-Inf){

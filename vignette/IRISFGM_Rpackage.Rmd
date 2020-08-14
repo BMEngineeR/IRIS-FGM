@@ -33,27 +33,7 @@ The main idea of IRIS-FGM consists of two major strategies:
 * (i)  biclustering 
 * (ii) quick mode (cluster) 
 
-## Obejct structure 
-The computational frame is constructed under the S4 data structure in R. The structure of `IRISCEM object` is: 
 
-- -**IRISCEM_Object:** *name of object is called IRISCEM.*
-  - -**raw_count:** *raw data matrix (gene in row, cell in columns, prefer using gene symbol).*
-  - -**processed_count:** *normalized and imputation (default: FALSE).*
-  - -**Meta_info:** *cell classification information based on LTMG and Bicluster.*
-  - -**Discretization:** *discretized matrix based on qubic 1.0, which prepares for microarry and bulk RNA-Seq analysis.*
-  - -**LTMG:** *LTMG slot is for storing relative results from first strategy.*
-    - -**LTMG_discrete:** *Condition assigned matrix, which is generating from LTMG model.*
-    - -**LTMG_BinarySingleSignal:** *binary matrix based on gene “on /off.”*
-    - -**LTMG_BinaryMultisignal:** *binary matrix based on multiple condition.*
-    - -**DimReduce:** *include three dimension loading score, including PCA, Tsne, and UMAP*
-    - -**MarkerGene:** *Marker gene based on cell type identified by Seurat clustering method.*
-    - -**Pathway:** *based on marker gene.*
-    - -**tmp.Seurat:** *temporary Seurat object. In this Seurat Object, the starting matrix is LTMG signalling matrix.*
-  - -**Bicluster:** **
-    - -**Coreg_gene:** *co-regulatory genes are stored in this slot as dataframe; the first column is gene name and the second column is module number.*
-    - -**CoCond_cell:** *co-condition cell are stored in this slot as dataframe; the first column is cell name and the second column is module number.*
-    - -**MarkerGene:** *Marker gene based on cell type identified by Markov chain clustering algorithm.*
-    - -**Pathway:** *genes based on co-expression gene of gene module (from Coreg_gene).*
 
 
 
@@ -104,7 +84,7 @@ As example, we will use Yan's data, a dataset containing 90 cells and 20,214 gen
 
 > Yan, L. et al. Single-cell RNA-Seq profiling of human preimplantation embryos and embryonic stem cells. Nat. Struct. Mol. Biol. 20, 1131-1139 (2013)
 
-The original expression matrix was downloaded from <https://s3.amazonaws.com/scrnaseq-public-datasets/manual-data/yan/nsmb.2660-S2.csv>. The expression is provided as RPKM value. For convenience, we removed the space in the column names and deleted the second column(Transcript_ID). The processed data is available at <https://github.com/zy26/BRICdata/blob/master/Example%20data/Yan_RPKM>.
+The original expression matrix was downloaded from <https://s3.amazonaws.com/scrnaseq-public-datasets/manual-data/yan/nsmb.2660-S2.csv>. The expression is provided as RPKM value. For convenience, we removed the space in the column names and deleted the second column(Transcript_ID). The processed data is available at <https://bmbl.bmi.osumc.edu/downloadFiles/Yan_expression.txt>.
 
 
 # 1. Input data, create IRISCEM object, add meta information, and preprocessing. 

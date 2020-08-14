@@ -12,13 +12,20 @@ ReadFrom10X_h5(input = NULL, use.names = TRUE, unique.features = TRUE)
 \S4method{ReadFrom10X_h5}{BRIC}(input = NULL, use.names = TRUE, unique.features = TRUE)
 }
 \arguments{
-\item{Input}{input 10X Chromium output data with the extented name as ".h5"}
+\item{input}{Input an HDF5 object}
 
-\item{...}{inherit function from Seurat::Read10X_h5}
+\item{use.names}{Use barcode, default is true}
+
+\item{unique.features}{use gene name, default is true}
 }
 \value{
 The output from \code{\link{Read10X_h5}}
+
+It will return a gene expression matrix.
 }
 \description{
-Read 10X HDF5 file based on Seurat package
+This function provide a method for reading in HDF5 file from 10X platform.
+}
+\examples{
+\donotrun{input_mat <- ReadFrom10X_h5(input= "my.h5")}
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/LTMGSCA.R
 \name{SeparateKRpkmNewLRPlus}
 \alias{SeparateKRpkmNewLRPlus}
-\title{Calcuate the LTMG_2LR for some genes}
+\title{Calcuate the LTMG_2LR for some genes
+Calcuate the LTMG_2LR for some genes}
 \usage{
 SeparateKRpkmNewLRPlus(
   x,
@@ -35,5 +36,6 @@ SeparateKRpkmNewLRPlus(
 a matrix contains pi, mean and sd
 }
 \description{
+Calcuate the LTMG_2LR for some genes
 Calcuate the LTMG_2LR for some genes
 }

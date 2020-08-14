@@ -4,8 +4,7 @@
 \alias{AddMeta}
 \alias{.addMeta}
 \alias{AddMeta,BRIC-method}
-\title{Create addmeta function for adding meta information
-This function can import cell annotation information to IRIS-FGM object.}
+\title{Create addmeta function for adding meta information}
 \usage{
 AddMeta(object, ...)
 
@@ -14,15 +13,14 @@ AddMeta(object, ...)
 \S4method{AddMeta}{BRIC}(object = NULL, meta.info = NULL)
 }
 \arguments{
-\item{object}{BRIC object}
+\item{object}{input IRIS-FGM object}
 
 \item{meta.info}{meta information table should be a data frame with rows representing cell and coloumn representing different group condition}
 }
 \value{
-It will reture a quality control figure
+It will add meta informatoin to IRISFGM.
 }
 \description{
-Create addmeta function for adding meta information
 This function can import cell annotation information to IRIS-FGM object.
 }
 \examples{

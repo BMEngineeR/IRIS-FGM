@@ -3,7 +3,8 @@
 NULL
 
 #' getblock function
-#'
+#' 
+#' get block from generated temporal files
 #' @param keyword "Conds" for co-regulatory or "Genes" for co-expression gene
 .getBlock <-function( object = NULL, keyword = "Conds"){
   tmp.block <- readLines(paste0(getwd(),"/tmp_expression.txt.chars.blocks"))
@@ -37,9 +38,12 @@ NULL
 
 #' run discretization
 #'
-#' @param object
-#' @param q
-#'
+#' run discretization based on Quantile method
+#' @param object input IRIS-FGM object
+#' @param q quantile number which is used as discretized cutoff. The bigger q means more cells will be categorized into 1 in terms of binarizing one gene.
+#' 
+#' 
+#' @return It will generate quantile based binary matrix.
 .runDiscretization <- function(object = NULL, q = 0.06, LogTransformation = FALSE){
   message("writing temporary expression file ...")
   tmp.dir <- paste0(getwd(),"/tmp_expression.txt")
@@ -61,8 +65,7 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
 
 #' RunBicusterBaseOnLTMG
 #'
-#'
-#' @examples
+#' Run bicluster based on LTMG
 .runBiclusterBaseOnLTMG <- function(object = NULL, OpenDual = FALSE, Extension = 1,
                                     NumBlockOutput = 100, BlockOverlap = 0.9, BlockCellMin = 15) {
   print("writing LTMG Discretization file ...")
@@ -75,9 +78,8 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
   qubic(i= tmp.dir, d = TRUE, C = OpenDual, c = Extension, o = NumBlockOutput, f= BlockOverlap, k = BlockCellMin)
 }
 
-#' Title
-#'
-#' @examples
+#' Run Discretization
+#' Generate temporal discretized file
 .runBiclusterBaseOnDiscretization <- function(object = NULL, OpenDual = TRUE, Extension = 1,
                                     NumBlockOutput = 100, BlockOverlap = 1, BlockCellMin = 15) {
   tmp.dir <- paste0(getwd(),"/tmp_expression.txt.chars")
@@ -88,8 +90,9 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
 }
 
 #' Run cluster
+#' 
 #' This function will identify the Biclusters based on LTMG or Quantile normalization
-#' @param object
+#' @param object input IRIS-FGM object
 #' @param DiscretizationModel use different discretization method, including "Quantile" and "LTMG."
 #' @param OpenDual the flag using the lower bound of condition number. Default: 5 percent of the gene number in current bicluster.
 #' @param Extention consistency level of the block (0.5-1.0], the minimum ratio between the number of identical valid symbols in a column and the total number of rows in the output. Default: 1.0.
@@ -97,8 +100,13 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
 #' @param BlockOverlap filtering overlapping blocks. Default: 0.7.
 #' @param BlockCellMin minimum column width of the block. Default: 15 columns.
 #' @name RunBicluster
-#' @return
+#' @return It will generate a temporal file on local directory for processed data named "tmp_expression.txt", discretized file named 
+#' "tmp_expression.txt.chars", and biclsuter block named "tmp_expression.txt.chars.block".
 #' @examples
+#' # based on LTMG discretization
+#' \dontrun{object <- RunBicluster(object, DiscretizationModel = "LTMG",OpenDual = F,NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)}
+#' # based on quantile discretization
+#' \dontrun{object <- RunBicluster(object, DiscretizationModel = "Quantile",OpenDual = F, NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)}
 .runBicluster <- function(object = NULL, DiscretizationModel = "Quantile",OpenDual = FALSE, Extension = 0.90,
                           NumBlockOutput = 100, BlockOverlap = 0.7, BlockCellMin = 15) {
   if(DiscretizationModel != "LTMG" && DiscretizationModel != "Quantile"){stop("please select either LTMG or Quantile")}

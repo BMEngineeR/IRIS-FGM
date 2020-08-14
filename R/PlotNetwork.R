@@ -2,8 +2,6 @@
 #' @include Classes.R
 NULL
 
-#' @param object
-#'
 .separateBic <- function(object = NULL){
   tmp.expression <- object@Processed_count
   bic.number<-length(unique(object@BiCluster@CoCond_cell$Condition))
@@ -21,22 +19,22 @@ NULL
 }
 
 
-#' Title PlotNetwork
+#' PlotNetwork
 #'
 #' @description This function is for building the module- module network. Nodes mean individual module. Edges mean overlapped gene (or cell).
 #' The weight of line show the number of gene (or cell).
 #' @param object Input object
 #' @param edge.by This parameter decide the edge by "cell" or by "gene". The default value is by gene.
 #' @param lay.out The type of layout to create, include linear (default), circle, kk.
-#' @param ...
+
 #'
 #' @name PlotNetwork
-#' @return
+#' @return It will generate a global network regarding overlapping genes or cells.
 #' @importFrom igraph graph_from_adjacency_matrix
 #' @importFrom ggraph ggraph geom_node_point geom_edge_arc scale_edge_width geom_node_text theme_graph
 #' @import ggplot2
-#' @examples
-.plotnetwork <- function(object, edge.by = "gene",lay.out = "linear",N.bicluster =c(1:20), ...){
+#' @examples \dontrun{object <- PlotNetwork(object,edge.by = "gene",N.bicluster =c(1:20) )}
+.plotnetwork <- function(object, edge.by = "gene",lay.out = "linear",N.bicluster =c(1:20)){
   Bic.list <- .separateBic(object)
   Bic.list.select<- Bic.list[N.bicluster]
   ntwork.adjacency.mtx <- matrix(1:(length(N.bicluster)*length(N.bicluster)),nrow = length(N.bicluster))
@@ -65,15 +63,14 @@ NULL
   print(p)
 }
 
-#' @param BRIC
-#'
+
 #' @rdname PlotNetwork
 #' @export
 #'
 setMethod("PlotNetwork","BRIC", .plotnetwork)
 
 
-#' Title
+
 #' @importFrom  stats cor
 .generateNetObject  <- function(object, N.bicluster = c(1,5),method = "spearman"){
   groups <- N.bicluster
@@ -117,21 +114,22 @@ setMethod("PlotNetwork","BRIC", .plotnetwork)
   return(list(cort, rowidlist))
 }
 
-#' Title PlotModuleNetwork
-#' @description This function will visualize
+#' PlotModuleNetwork
+#' @description This function will visualize co-expression gene network based on coorelation analysis. The nodes represent the gene module network from the selected bicluster. The size of the nodes indicates the degree of presence. The thickness of edges indicates the value of the correlation coefficient.
 #' @param object Input object.
 #' @param N.bicluster number of biclsuter to plot.
 #' @param Node.color color of nodes. This parameter also accepts color codes, e.g. "#AE1503" or "darkred."
+#' @param cutoff this parameter decide the cutoff of correlation
 #' @importFrom igraph graph.adjacency degree
 #' @import qgraph
 #' @return
 #' @name PlotModuleNetwork
 #'
-#' @examples
-.plotmodulenetwork <- function(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504", node.label.cex = 1 ){
+#' @examples \dontrun{object <- PlotModuleNetwork(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504", cutoff=0.7, node.label.cex = 1 )}
+.plotmodulenetwork <- function(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504",cutoff=0.7, node.label.cex = 1 ){
   my.list <- .generateNetObject(object =object,N.bicluster=N.bicluster )
   cort <- my.list[[1]]
-  my.adjacency <- ifelse(abs(cort)<0.1,0,cort)
+  my.adjacency <- ifelse(abs(cort)< cutoff ,0,cort)
   g <- graph.adjacency(my.adjacency,weighted = T,diag = F,mode ="undirected" )
   degree.normalize <- 4*(degree(g)/max(degree(g)))
   a<- my.list
@@ -140,7 +138,7 @@ setMethod("PlotNetwork","BRIC", .plotnetwork)
            theme = "classic",cut =0,
            layout = "circle", minimum = 0.5, posCol=c("grey"), negCol="darkred",
            # barLength = 0.5,
-           legend.cex = 0.7, color = Node.color,vsize = degree.normalize,vsize2= degree.normalize,
+           legend.cex = 0.7, color = Node.color,vsize = degree.normalize,vsize2= degree.normalize,label.scale.equal=F,
            vTrans = 200,label.cex =node.label.cex,labels = rownames(a[[1]]),label.scale=F)
   }
   if (length(N.bicluster)==2){
@@ -152,8 +150,7 @@ setMethod("PlotNetwork","BRIC", .plotnetwork)
   }
 }
 
-#' @param BRIC
-#'
+
 #' @rdname PlotModuleNetwork
 #' @export
 #'

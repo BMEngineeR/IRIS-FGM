@@ -2,10 +2,23 @@
 % Please edit documentation in R/LTMGSCA.R
 \name{SeparateKRpkmNewp}
 \alias{SeparateKRpkmNewp}
-\title{Title}
+\title{Title
+Title}
 \usage{
 SeparateKRpkmNewp(x, n, q, k, err = 1e-10)
 }
+\arguments{
+\item{x}{x}
+
+\item{n}{n}
+
+\item{q}{q}
+
+\item{k}{k}
+
+\item{err}{err}
+}
 \description{
+Title
 Title
 }

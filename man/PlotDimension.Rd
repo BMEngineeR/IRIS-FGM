@@ -4,7 +4,7 @@
 \alias{PlotDimension}
 \alias{.plotDimension}
 \alias{PlotDimension,BRIC-method}
-\title{Title Visualize dimension reduction results}
+\title{Visualize dimension reduction results}
 \usage{
 PlotDimension(object, ...)
 
@@ -13,15 +13,18 @@ PlotDimension(object, ...)
 \S4method{PlotDimension}{BRIC}(object, reduction = "umap", pt_size = 1)
 }
 \arguments{
-\item{object}{Input Object}
+\item{object}{Input IRIS-FGM Object}
 
 \item{reduction}{Choose one of approaches for dimension reduction, including "pca", "tsne", "umap".}
 
-\item{pt_size}{point size, default is 0.}
+\item{pt_size}{Point size, default is 0.}
 }
 \value{
-
+generate plot on umap space.
 }
 \description{
-Title Visualize dimension reduction results
+Generate Umap and it requires user to input cell label index on console window.
+}
+\examples{
+\dontrun{PlotDimension(object)}
 }

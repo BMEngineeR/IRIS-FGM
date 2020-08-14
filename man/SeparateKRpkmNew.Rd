@@ -2,7 +2,8 @@
 % Please edit documentation in R/LTMGSCA.R
 \name{SeparateKRpkmNew}
 \alias{SeparateKRpkmNew}
-\title{Calcuate}
+\title{Title
+Title}
 \usage{
 SeparateKRpkmNew(x, n, q, k, err = 1e-10)
 }
@@ -15,11 +16,12 @@ SeparateKRpkmNew(x, n, q, k, err = 1e-10)
 
 \item{k}{k=1..5}
 
-\item{err}{}
+\item{err}{err}
 }
 \value{
 a matrix contains pi, mean and sd
 }
 \description{
-Calcuate
+Title
+Title
 }

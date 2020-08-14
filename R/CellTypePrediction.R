@@ -2,10 +2,10 @@
 #' @include Classes.R
 NULL
 
-#' @param blocks
+#' generate graph
+#' 
+#' genrate graph
 #'
-#'
-#' @examples
 GRAPH <-function(blocks){
   A <- readLines(blocks)
   TEMP <- grep('Conds', A, value = TRUE) ## extract condition lines in each BC
@@ -133,11 +133,21 @@ CLUSTERING <- function(Raw,blocks,method='MCL',K=NULL){
   RST
 }
 
+#' Markov Clustering
+#' 
+#' This function is for performing Markov chain clustering regarding generated co-expression gene modules. This clustering method is working for relative small dataset.
+#' If you have a large dataset, We recommend you should use Seurat clustering wrapped in this IRISFGM package. See details \code{\link{RunLTMG}},
+#' \code{\link{RunDimensionReduction}}, and \code{\link{RunClassification}}.
+#' @param object input IRIS-FGM object
+#'
+#' @param method using MCL(Markov Cluster) algorithm to predict clusters. There is alternative option which is "SC." ( 
+#' Unnormalized spectral clustering function. Uses Partitioning Around Medoids clustering instead of K-means.)
+#' @param K expected number of predicted clusters when you are using "SC" method for cell clustering and this parameter does not work for "MCL"
+#'
 #' @useDynLib IRISFGM
 #' @export
 #' @name FindClassBasedOnMC
-## final function
-## i is the input, K is an optional parameter, used only when method=='SC'
+#' @examples \dontrun{object <- FindClassBasedOnMC(object)}
 .final <- function(object = NULL, method = 'MCL', K = 5){
   # chars file
   input <- paste0(getwd(),"/tmp_expression.txt.chars")

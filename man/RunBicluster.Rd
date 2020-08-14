@@ -4,8 +4,7 @@
 \alias{RunBicluster}
 \alias{.runBicluster}
 \alias{RunBicluster,BRIC-method}
-\title{Run cluster
-This function will identify the Biclusters based on LTMG or Quantile normalization}
+\title{Run cluster}
 \usage{
 RunBicluster(object, ...)
 
@@ -30,6 +29,8 @@ RunBicluster(object, ...)
 )
 }
 \arguments{
+\item{object}{input IRIS-FGM object}
+
 \item{DiscretizationModel}{use different discretization method, including "Quantile" and "LTMG."}
 
 \item{OpenDual}{the flag using the lower bound of condition number. Default: 5 percent of the gene number in current bicluster.}
@@ -43,9 +44,15 @@ RunBicluster(object, ...)
 \item{Extention}{consistency level of the block (0.5-1.0], the minimum ratio between the number of identical valid symbols in a column and the total number of rows in the output. Default: 1.0.}
 }
 \value{
-
+It will generate a temporal file on local directory for processed data named "tmp_expression.txt", discretized file named 
+"tmp_expression.txt.chars", and biclsuter block named "tmp_expression.txt.chars.block".
 }
 \description{
-Run cluster
 This function will identify the Biclusters based on LTMG or Quantile normalization
+}
+\examples{
+# based on LTMG discretization
+\dontrun{object <- RunBicluster(object, DiscretizationModel = "LTMG",OpenDual = F,NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)}
+# based on quantile discretization
+\dontrun{object <- RunBicluster(object, DiscretizationModel = "Quantile",OpenDual = F, NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)}
 }

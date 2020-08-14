@@ -236,16 +236,20 @@ LTMG<-function(VEC,Zcut_G,k=5){
 
 
 # Run LTMG function --------------------------------------------------------------------
-#' RunLTMG
-#' @description This function is for moduling gene expression data via Left-truncated mixture Guassian model.
-#' @param object
-#' @param Gene_use using X numebr of top variant gene. input a number, recommend 2000.
+#' Run LTMG module
+#' 
+#' We will use Left-truncated Mixture Gaussian distribution to model the regulatory signal of each gene. Parameter, 'Gene_use', decides number of top high variant gene for LTMG modeling, and here we use all genes.
+#' @param object Input IRIS-FGM object 
+#' @param Gene_use Using X numebr of top variant gene. input a number, recommend 2000.
 #' @name RunLTMG
-#' @return
+#' @return it will reture a LTMG signal matrix
 #' @importFrom AdaptGauss Intersect2Mixtures
 #' @importFrom mixtools normalmixEM
 #' @importFrom stats sd
-#' @examples
+#' @examples # If you want to explore DEG, we recommend you should use top 2000 highly variant gene. 
+#' \dontrun{object <- RunLTMG(object,Gene_use = 2000, seed = 123, k = 5)}
+#' # If you want to run bicluster based on LTMG model, we recommend you should use all genes.
+#' \dontrun{object <- RunLTMG(object,Gene_use ="all", seed = 123, k = 5)}
 .RunLTMG <- function(object,Gene_use = NULL, seed = 123, k = 5){
   MAT <- as.matrix(object@Processed_count)
   set.seed(seed)
@@ -346,7 +350,12 @@ LTMG<-function(VEC,Zcut_G,k=5){
 setMethod("RunLTMG","BRIC", .RunLTMG)
 #----------------------------------------------------------------------------
 
-# get LTMG matrix function-------------------------
+#' Get LTMG matrix
+#' 
+#' Get LTMG matrix
+#' 
+#' @param object Input IRIS-FGM object
+#' @examples \dontrun{GetLTMGmatrix(object)}
 .GetLTMGmatrix <- function (object) {
   tmp <- object@LTMG@LTMG_discrete
   return(tmp)
@@ -378,6 +387,13 @@ setMethod("CalBinarySingleSignal", "BRIC", .CalBinarySingleSignal)
 setMethod("GetBinarySingleSignal", "BRIC", .GetBinarySingleSignal)
 # --------------------------------------------------------------------------
 # calculate multisignal function and get function--------------------------
+#' calculate multisignal
+#' This function is for calculating multisignal from LTMG signaling matrix.
+#' @param object Input IRIS-FGM
+#'
+#' @return it will return a binary matrix
+#'
+#' @examples \dontrun{object <- CalBinaryMultiSignal(object)}
 .CalBinaryMultiSignal <- function(object = NULL){
   x <- object@LTMG@LTMG_discrete
   x <- x[rowSums(x)>0,]
@@ -407,6 +423,13 @@ setMethod("GetBinarySingleSignal", "BRIC", .GetBinarySingleSignal)
 #' @rdname CalBinaryMultiSignal
 setMethod("CalBinaryMultiSignal", "BRIC", .CalBinaryMultiSignal)
 
+#' Get multisignal binary matrix
+#' This function is for getting multisignal from LTMG signaling matrix.
+#' @param object Input IRIS-FGM
+#'
+#' @return it will get a binary matrix
+#'
+#' @examples \dontrun{object <- CalBinaryMultiSignal(object)}
 .GetBinaryMultiSignal <- function(object = NULL){
   tmp <- object@LTMG@LTMG_BinaryMultisignal
   return(tmp)

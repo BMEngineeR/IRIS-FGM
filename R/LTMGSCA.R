@@ -1,8 +1,8 @@
 #' Title
-#'
-#' @param q
-#' @param mean
-#' @param sd
+#' Title
+#' @param q q
+#' @param mean mean
+#' @param sd sd
 InverseMillsRatio <- function(q, mean, sd) {
   x <- (q - mean) / sd
   pdf <- dnorm(x, log = TRUE)
@@ -12,11 +12,12 @@ InverseMillsRatio <- function(q, mean, sd) {
   return(d)
 }
 
-
-#' @param q
-#' @param mean
-#' @param sd
-#' @param w10
+#' Title
+#' Title
+#' @param q q
+#' @param mean mean
+#' @param sd sd
+#' @param w10 w10
 Pi_Zj_Zcut_new <- function(q, mean, sd, wl0) {
   a <- wl0 * pnorm(q, mean, sd)
   if(sum(a) == 0) return(wl0)
@@ -24,11 +25,12 @@ Pi_Zj_Zcut_new <- function(q, mean, sd, wl0) {
 }
 
 
-
-#' @param x
-#' @param n
-#' @param q
-#' @param err
+#' Title
+#' Title
+#' @param x x
+#' @param n n
+#' @param q q
+#' @param err err
 SeparateKRpkmNew2 <- function(x, n, q, err = 1e-10) {
   k <- 1
   q <- max(q, min(x))
@@ -79,17 +81,16 @@ SeparateKRpkmNew2 <- function(x, n, q, err = 1e-10) {
   return(cbind(p, mean, sd))
 }
 
-#' Calcuate
-#'
+#' Title
+#' Title
 #' @param x data, example: x<-runif(100,0,1)
 #' @param n rounds
 #' @param q cutoff
 #' @param k k=1..5
-#' @param err
+#' @param err err
 #'
 #' @return a matrix contains pi, mean and sd
 #'
-#' @examples
 SeparateKRpkmNew <- function(x, n, q, k, err = 1e-10) {
   if (k == 1) return(SeparateKRpkmNew2(x, n, q, err = 1e-10))
   q <- max(q, min(x))
@@ -143,12 +144,12 @@ SeparateKRpkmNew <- function(x, n, q, k, err = 1e-10) {
 
 
 #' Title
-#'
-#' @param x
-#' @param n
-#' @param q
-#' @param k
-#' @param err
+#' Title
+#' @param x x
+#' @param n n
+#' @param q q
+#' @param k k
+#' @param err err
 SeparateKRpkmNewp <- function(x, n, q, k, err = 1e-10) {
   q <- max(q, min(x))
   c <- sum(x < q)
@@ -195,17 +196,18 @@ SeparateKRpkmNewp <- function(x, n, q, k, err = 1e-10) {
 }
 
 #' Title
-#'
-#' @param x
-#' @param n
-#' @param q
-#' @param k
-#' @param err
+#' Title
+#' @param x x
+#' @param n n
+#' @param q q
+#' @param k k
+#' @param err err
 LogSeparateKRpkmNew <- function(x, n, q, k, err = 1e-10) {
   return (SeparateKRpkmNew(log(x), n, log(q), k, err))
 }
+
 #' Calcuate the LTMG_2LR for some genes
-#'
+#' Calcuate the LTMG_2LR for some genes
 #' @param x data, a List of NumericVector
 #' @param n rounds
 #' @param q cutoff of the elements in x
@@ -216,7 +218,6 @@ LogSeparateKRpkmNew <- function(x, n, q, k, err = 1e-10) {
 #'
 #' @return a matrix contains pi, mean and sd
 #'
-#' @examples
 SeparateKRpkmNewLRPlus <- function(x, n, q, r, s = 0.05, k = 2, err = 1e-10, M = Inf, m = -Inf) {
   c <- sapply(x, function(x) sum(x < q), simplify = "array")
 
@@ -499,11 +500,14 @@ SeparateKRpkmNewLRPlus <- function(x, n, q, r, s = 0.05, k = 2, err = 1e-10, M =
   return(list(ret, i))
 }
 
-
+#' Title
+#' Title
 SeparateKRpkmNewLR <- function(x, n, q, r, s = 0.05, k = 2, err = 1e-10, M = Inf, m = -Inf) {
   return (SeparateKRpkmNewLRPlus(x, n, q, r, s, k, err, M, m)[[1]])
 }
 
+#' Title
+#' Title
 LogSeparateKRpkmNewLR <- function(x, n, q, r, k = 2) {
   return(SeparateKRpkmNewLR(log(x), n, log(q), r, k))
 }

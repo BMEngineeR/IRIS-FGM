@@ -7,8 +7,13 @@
 .runDiscretization(object = NULL, q = 0.06, LogTransformation = FALSE)
 }
 \arguments{
-\item{q}{}
+\item{object}{input IRIS-FGM object}
+
+\item{q}{quantile number which is used as discretized cutoff. The bigger q means more cells will be categorized into 1 in terms of binarizing one gene.}
+}
+\value{
+It will generate quantile based binary matrix.
 }
 \description{
-run discretization
+run discretization based on Quantile method
 }

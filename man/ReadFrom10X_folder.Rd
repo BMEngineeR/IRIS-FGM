@@ -12,13 +12,14 @@ ReadFrom10X_folder(input.dir = NULL)
 \S4method{ReadFrom10X_folder}{BRIC}(input.dir = NULL)
 }
 \arguments{
-\item{Input.dir}{input 10X Chromium output data by using output folder}
-
-\item{...}{inherit function from Seurat::Read10X_h5}
+\item{Input.dir}{Input 10X Chromium output data by using output folder}
 }
 \value{
 The output from \code{\link{Read10X}}
 }
 \description{
-Read 10X folder based on Seurat package
+This function provide a method for reading in a folder from 10X platform. In this folder, it should contain three files: barcode, matrix, and gene.
+}
+\examples{
+\dontrun{input_mat <- ReadFrom10X_folder(input.dir = "my_path_to_folder")}
 }

@@ -4,7 +4,7 @@
 \alias{SubsetData}
 \alias{.subset_data}
 \alias{SubsetData,BRIC-method}
-\title{Title subset data by number of count and numebr of features.}
+\title{Subset data by number of count and numebr of gene.}
 \usage{
 SubsetData(object, ...)
 
@@ -25,6 +25,8 @@ SubsetData(object, ...)
 )
 }
 \arguments{
+\item{object}{input IRIS-FGM object}
+
 \item{nFeature.upper}{select upper limit for number of feature}
 
 \item{nFeature.lower}{select lower limit for number of feature}
@@ -34,8 +36,13 @@ SubsetData(object, ...)
 \item{Counts.lower}{select lower limit for number of UMI counts}
 }
 \value{
-
+it will filter out some cell regarding threshhold.
 }
 \description{
-Title subset data by number of count and numebr of features.
+This function is used for filtering out low-quality data based on previous result generated from \code{\link{PlotMeta}}
+}
+\examples{
+# Use Yan's data which posts on github tutorial
+\dontrun{ object <- SubsetData(object, nFeature.upper=15000,nFeature.lower=8000, Counts.upper=700000,Counts.lower=400000)}
+
 }

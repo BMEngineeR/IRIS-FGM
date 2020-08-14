@@ -1,11 +1,16 @@
 #' Read 10X HDF5 file based on Seurat package
 #'
-#' @param Input input 10X Chromium output data with the extented name as ".h5"
-#' @param ... inherit function from Seurat::Read10X_h5
+#' This function provide a method for reading in HDF5 file from 10X platform.
+#'
+#' @param input Input an HDF5 object
+#' @param use.names Use barcode, default is true
+#' @param unique.features  use gene name, default is true
+#'
 #' @return The output from \code{\link{Read10X_h5}}
 #' @export
 #' @importFrom Matrix sparseMatrix
-#' @examples
+#' @return It will return a gene expression matrix. 
+#' @examples \donotrun{input_mat <- ReadFrom10X_h5(input= "my.h5")}
 ReadFrom10X_h5<-function(input=NULL,use.names = TRUE, unique.features = TRUE){
   if (!requireNamespace("hdf5r", quietly = TRUE)) {
     stop("Please install hdf5r by using install.packages('hdf5r')")
@@ -71,15 +76,15 @@ setMethod("ReadFrom10X_h5", "BRIC", ReadFrom10X_h5)
 
 
 #' Read 10X folder based on Seurat package
-#'
-#' @param Input.dir input 10X Chromium output data by using output folder
-#' @param ... inherit function from Seurat::Read10X_h5
+#' 
+#' This function provide a method for reading in a folder from 10X platform. In this folder, it should contain three files: barcode, matrix, and gene.
+#' @param Input.dir Input 10X Chromium output data by using output folder
 #'
 #' @return The output from \code{\link{Read10X}}
 #' @export
 #' @importFrom Matrix readMM
 #'
-#' @examples
+#' @examples \dontrun{input_mat <- ReadFrom10X_folder(input.dir = "my_path_to_folder")}
 ReadFrom10X_folder <- function (input.dir = NULL)
 {
 

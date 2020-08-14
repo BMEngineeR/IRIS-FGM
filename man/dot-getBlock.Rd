@@ -10,5 +10,5 @@
 \item{keyword}{"Conds" for co-regulatory or "Genes" for co-expression gene}
 }
 \description{
-getblock function
+get block from generated temporal files
 }

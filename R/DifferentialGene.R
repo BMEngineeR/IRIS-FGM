@@ -2,12 +2,17 @@
 #' @include Classes.R
 NULL
 
-#' @param object BRIC object
+#' Find marker for idnetified cell clusters
+#' 
+#' This function has wrapped DEsingle package and perform single cell analysis based on LTMG signaling matrix.
+#' 
+#' @param object input IRIS-FGM object
 #'
 #' @param SimpleResult marker gene only output log fold change (LFC), p-value, and adjusted p-value.
 #' @param FDR a number to specify the threshold of FDR, default by 0.05
 #' @name FindMarkers
 #' @importFrom DEsingle DEsingle DEtype
+#' @examples \dontrun{object <- FindMarker(object,SimpleResult = T, FDR = 0.05)}
 #'
 .findMarkers <- function(object,SimpleResult = T, FDR = 0.05){
   # two group number as factor.

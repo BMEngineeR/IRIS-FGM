@@ -14,5 +14,5 @@
 )
 }
 \description{
-RunBicusterBaseOnLTMG
+Run bicluster based on LTMG
 }

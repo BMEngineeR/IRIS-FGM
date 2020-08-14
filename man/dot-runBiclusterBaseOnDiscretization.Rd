@@ -2,7 +2,8 @@
 % Please edit documentation in R/Bicluster.R
 \name{.runBiclusterBaseOnDiscretization}
 \alias{.runBiclusterBaseOnDiscretization}
-\title{Title}
+\title{Run Discretization
+Generate temporal discretized file}
 \usage{
 .runBiclusterBaseOnDiscretization(
   object = NULL,
@@ -14,5 +15,6 @@
 )
 }
 \description{
-Title
+Run Discretization
+Generate temporal discretized file
 }

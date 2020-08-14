@@ -2,13 +2,18 @@
 #' @include Classes.R
 NULL
 
-#' @param object
+#' Run dimension reduction based on seurat method 
+#' 
+#' This function is based on the Seurat package to perform dimension reduction. The input matirx is the LTMG signaling matrix.
+#' @param object input IRIS-FGM
 #'
-#' @param reduction
-#' @param dims
+#' @param reduction select a method for dimension reduction, including umap, tsne, and pca.
+#' @param dims select the number of PCs from PCA results to perform the following dimension reduction and cell clustering.
 #' @name RundimensionReduction
 #' @importFrom Seurat CreateSeuratObject ScaleData RunPCA RunTSNE RunUMAP FindVariableFeatures
-.runDimensionReduction <- function(object, reduction = "tsne", dims = 1:15 ,perplexity = 15, seed = 1){
+#' @return This function will generate pca, tsne, or umap dimension reduction results.
+#' @examples dontrun{obejct <- RunDimensionReduction(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1)}
+.runDimensionReduction <- function(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1){
   Tmp.seurat <- CreateSeuratObject(object@LTMG@LTMG_discrete)
   Tmp.seurat<- ScaleData(Tmp.seurat)
   Tmp.seurat <- suppressMessages(RunPCA(Tmp.seurat, features = rownames(Tmp.seurat@assays$RNA)))
@@ -35,15 +40,20 @@ setMethod("RunDimensionReduction", "BRIC", .runDimensionReduction)
 
 
 
-#' @param object
-#' @param k.param
-#' @param resolution
-#' @param algorithm
-#' @param dims
+#' Classify cell type prediction
+#' 
+#' This function is based on Seurat package.
+#' @param object input IRIS-FGM object.
+#' @param k.param Defines k for the k-nearest neighbor algorithm.
+#' @param resolution Value of the resolution parameter, use a value above (below) 1.0 if you want to obtain a larger (smaller) number of communities.
+#' @param algorithm Algorithm for modularity optimization (1 = original Louvain algorithm; 2 = Louvain algorithm with multilevel refinement; 3 = SLM algorithm; 4 = Leiden algorithm). Leiden requires the leidenalg python.
+#' @param dims 	Dimensions of reduction to use as input.
 #' @name RunClassification
 #' @importFrom Seurat FindNeighbors FindClusters
 #' @import ggplot2
-.runClassification <- function(object,dims = 1:15, k.param = 20, resolution = 0.6, algorithm = 1 ){
+#' @return It will generate cell type inforamtion.
+#' @examples \dontrun{object <- RunClassification(object, dims = 1:15, k.param = 20, resolution = 0.6, algorithm = 1)}
+.runClassification <- function(object, dims = 1:15, k.param = 20, resolution = 0.6, algorithm = 1 ){
   if ( is.null(object@LTMG@Tmp.seurat)) {stop("There is no temporary seurat obejct getting detected. \n Try to run RundimensionRuduction first.")}
   Tmp.seurat <- object@LTMG@Tmp.seurat
   Tmp.seurat <- FindNeighbors(Tmp.seurat,dims=dims, k.param = k.param)
@@ -67,16 +77,17 @@ setMethod("RunClassification", "BRIC", .runClassification)
 
 
 
-#' Title Visualize dimension reduction results
+#' Visualize dimension reduction results
 #'
-#' @param object Input Object
+#' Generate Umap and it requires user to input cell label index on console window.
+#' @param object Input IRIS-FGM Object
 #' @param reduction Choose one of approaches for dimension reduction, including "pca", "tsne", "umap".
-#' @param pt_size point size, default is 0.
+#' @param pt_size Point size, default is 0.
 #'
-#' @return
+#' @return generate plot on umap space.
 #' @export
 #' @name PlotDimension
-#' @examples
+#' @examples \dontrun{PlotDimension(object)}
 .plotDimension <- function(object, reduction = "umap", pt_size = 1){
 
   if(grepl("tsne", reduction, ignore.case = T) || grepl("umap", reduction, ignore.case = T)||grepl("pca", reduction, ignore.case = T)){

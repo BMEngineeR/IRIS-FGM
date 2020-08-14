@@ -48,6 +48,8 @@ Now the MetaQUBIC is successfully installed and ready for use.
 setwd("./my_working_dir/")
 library(IRISFGM)
 ```
+***
+
 ## Read in data.
 ```
 InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.names = 1)
@@ -56,6 +58,8 @@ InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.
 IRIS-FGM also provides the function to read in 10X scRNA-Seq data format.
 
 Read HDF5 file```ReadFrom10X_h5()``` or read the folder which contain three files (barcode, sparse matrix, genes)```ReadFrom10X_folder()```
+
+***
 
 ## Analysis data
 ### Data preprocessing and LTMG modeling

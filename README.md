@@ -149,13 +149,13 @@ PlotHeatmap(object,N.bicluster = c(20,35),show.annotation = F)
 
 Since we already know the bicluster 20 and bicluster 35 showing the difference at the global level. We then will focus on a local gene module and investigate the co-expression gene network with in the module. Yellow nodes represent the gene module network from bicluster #20. The nodes' size indicates the degree of presence (the number of connected edges for one node). The thickness of edges suggests the value of the correlation coefficient. 
 
-3.1 From this figure (bicluster 20, click the figure for zooming in), we can tell the EIFAD gene show a negative correlation (red color edge) to GOSR1 & BBS5, and show a positive correlation (grey edge) to ZNF394 & POTEM.
+* From this figure (bicluster 20, click the figure for zooming in), we can tell the EIFAD gene show a negative correlation (red color edge) to GOSR1 & BBS5, and show a positive correlation (grey edge) to ZNF394 & POTEM.
 ```
 PlotModuleNetwork(object, N.bicluster = 20, cutoff=0.6, Node.color = "#E8E504")
 ```
 <img src="https://user-images.githubusercontent.com/26455910/90256029-1a95ef00-de13-11ea-87a4-a4302396df8e.png" alt="metadata" width="600" height="400">
 
-3.2 From this figure (bicluster 35, click the figure for zooming in), we can tell the ROBO1 gene shows a negative correlation (red color edge) to NLRP4 & BPGM. GNPDA2 gene shows a positive correlation to BPGM, KIT, and CCDC25.
+* From this figure (bicluster 35, click the figure for zooming in), we can tell the ROBO1 gene shows a negative correlation (red color edge) to NLRP4 & BPGM. GNPDA2 gene shows a positive correlation to BPGM, KIT, and CCDC25.
 ```
 PlotModuleNetwork(object, N.bicluster = 35, cutoff=0.6, Node.color = "#E8E504")
 ```

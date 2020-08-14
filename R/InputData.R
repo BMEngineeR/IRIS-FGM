@@ -10,7 +10,7 @@
 #' @export
 #' @importFrom Matrix sparseMatrix
 #' @return It will return a gene expression matrix. 
-#' @examples \donotrun{input_mat <- ReadFrom10X_h5(input= "my.h5")}
+#' @examples \dontrun{input_mat <- ReadFrom10X_h5(input= "my.h5")}
 ReadFrom10X_h5<-function(input=NULL,use.names = TRUE, unique.features = TRUE){
   if (!requireNamespace("hdf5r", quietly = TRUE)) {
     stop("Please install hdf5r by using install.packages('hdf5r')")

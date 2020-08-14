@@ -134,7 +134,7 @@ From step 1 in "Analysis functional gene module," we postulate gene components f
 ```
 PlotHeatmap(object,N.bicluster = c(20,35),show.annotation = F)
 ```
-<img src="https://user-images.githubusercontent.com/26455910/90255235-01d90980-de12-11ea-8469-8992f578ee4b.png",alt="metadata" width="600" height="300">
+<img src="https://user-images.githubusercontent.com/26455910/90255235-01d90980-de12-11ea-8469-8992f578ee4b.png" alt="metadata" width="600" height="300">
 
 
 3. Visualize local co-expression gene module network: 

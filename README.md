@@ -22,15 +22,21 @@ R (equal or greater than 3.5)
 ## Pre-installation
 1. Install required packages from CRAN: 
 
-```install.packages(c('BiocManager','devtools', 'AdaptGauss', "pheatmap", 'mixtools','MCL', 'anocva', 'qgraph','Rtools','ggpubr',"ggraph","Seurat"))```
+```
+install.packages(c('BiocManager','devtools', 'AdaptGauss', "pheatmap", 'mixtools','MCL', 'anocva', 'qgraph','Rtools','ggpubr',"ggraph","Seurat"))
+```
                    
 2. Install required package from Bioconductor:  
 
-```BiocManager::install(c('org.Mm.eg.db','multtest','org.Hs.eg.db','clusterProfiler','DEsingle', 'DrImpute','scater', 'scran'))```
+```
+BiocManager::install(c('org.Mm.eg.db','multtest','org.Hs.eg.db','clusterProfiler','DEsingle', 'DrImpute','scater', 'scran'))
+```
 
 3. Install IRIS-FGM from github:
 
-```devtools::install_github("BMEngineeR/IRIS-FGM", force = T)```
+```
+devtools::install_github("BMEngineeR/IRIS-FGM", force = T)
+```
 
 Now the MetaQUBIC is successfully installed and ready for use. 
 ***
@@ -44,7 +50,9 @@ setwd("./my_working_dir/")
 library(IRISFGM)
 ```
 ## Read in data.
-```InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.names = 1)```
+```
+InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.names = 1)
+```
 
 IRIS-FGM also provides the function to read in 10X scRNA-Seq data format.
 

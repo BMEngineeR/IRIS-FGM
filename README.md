@@ -100,7 +100,7 @@ object <- ProcessData(object, normalization = "LibrarySizeNormalization")
 ```
 5. **LTMG modeling**:
 
-Here, we will use Left-truncated Mixture Gaussian distribution to model the regulatory signal of each gene. Parameter, 'Gene_use', decides number of top high variant gene for LTMG modeling, and here we use all genes.
+Here, we will use Left-truncated Mixture Gaussian distribution to model the regulatory signal of each gene. Parameter, 'Gene_use', decides number of top highly variant gene for LTMG modeling, and here we use all genes.
 ```{r run_LTMG, echo = TRUE,eval = FALSE}
 object <- RunLTMG(object, Gene_use = "all", seed = 123)
 ```

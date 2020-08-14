@@ -116,38 +116,37 @@ object <- RunDiscretization(object, q = 0.06)
 object <- RunBicluster(object, DiscretizationModel = "Quantile",OpenDual = TRUE, Extension = 0.90,
                           NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)
 ```
-**Analyzing Functional gene module**
+**Analyzing functional gene module**
 This section is based on the quantile based discretization and biclustering results.
 
-1. Visualize co-expression gene module network: 
+1. Visualize the gene module-to-module relationship globally:
 
-Yellow nodes represent the gene module network from bicluster #1. The size of the nodes indicates the degree of presence (the number of connected edges for one node). The thickness of edges indicates the value of the correlation coefficient. From this figure, we can conclude that PRAMEF4, PRAMEF9, PRAMEF6, PRAMEF5, PRAMEF15 genes are highly co-expressed. 
+The figure via the number of overlap genes (controlled `edge.by = "gene"`) shows that bicluster 20, 23, 24, and 25 have similar gene components. Bicluster 21, 22, 25, and until bicluster 35 have similar gene components. In this figure, we can see gene modules in bicluster 20, 23, 24, and 25 may have a similar component and similar functionality, whereas the gene components from this gene module may differ from the other gene modules from the other biclusters (i.e., bicluster 21, 22, 25, and until bicluster 35)
+```
+PlotNetwork(object,N.bicluster =c(20:30), edge.by = "gene")
+```
 
+<img src="https://user-images.githubusercontent.com/26455910/90253364-0819b680-de0f-11ea-91a6-a61e1df576e8.png" alt="metadata" width="600" height="300">
+
+2. Visualize bicluster 20 & bicluster 35 on heatmap.
+
+From step 1 in "Analysis functional gene module," we postulate gene components from bicluster 20, 23, 24, and 25 may differ from gene components from bicluster 21, 22, 25, and until bicluster 35. Therefore, in this section, we will focus on how the difference is. Therefore, we use bicluster 20 and bicluster 35 to generate heatmap and show such a difference.
+```
+PlotHeatmap(object,N.bicluster = c(20,35),show.annotation = F)
+```
+<img src="https://user-images.githubusercontent.com/26455910/90255235-01d90980-de12-11ea-8469-8992f578ee4b.png",alt="metadata" width="600" height="300">
+
+
+3. Visualize local co-expression gene module network: 
+
+Since we already know the bicluster 20 and bicluster 35 showing the difference in global level. Then we will focus on a local gene module and investigate co-expression gene network with in the module. 
+Yellow nodes represent the gene module network from bicluster #1. The size of the nodes indicates the degree of presence (the number of connected edges for one node). The thickness of edges indicates the value of the correlation coefficient. From this figure, we can tell EIFAD gene show negative correlation (red color edge) to GOSR1 & BBS5, and show positive correlation (grey edge) to ZNF394 & POTEM.
 ```
 PlotModuleNetwork(object, N.bicluster = 1, cutoff=0.6, Node.color = "#E8E504")
 ```
-<img src="https://user-images.githubusercontent.com/26455910/90209972-c6f7b700-ddba-11ea-8678-7481f3431cff.png" alt="metadata" width="900" height="700">
+<img src="https://user-images.githubusercontent.com/26455910/90256029-1a95ef00-de13-11ea-87a4-a4302396df8e.png" alt="metadata" width="900" height="700">
 
-2. Visualize the gene module-to-module global relationship:
 
-The figure via the number of overlap genes (controlled `edge.by = "gene"`) shows that bicluster 1, 2, 3, 9, and 10 have similar gene components. Bicluster4, 5, 6, 7, and 8 have similar gene components. The figure via the number of overlap cells (controlled `edge.by = "cell"`) shows that bicluster 1, 2, 3, 9, and 10 have similar cell components. Bicluster 4, 5, 6, 7, and 8 have similar cell components. In conclusion, bicluster 1, 2, 3, 9, and 10 may have similar gene and cell component, which differ from components of bicluster 4, 5, 6, 7, and 8.
-```
-PlotNetwork(object,N.bicluster =c(20:30), cutoff=0.6, edge.by = "gene")
-```
-
-<img src="https://user-images.githubusercontent.com/26455910/90210312-a11ee200-ddbb-11ea-9fd6-3ec17491def8.png" alt="metadata" width="600" height="300">
-```
-PlotNetwork(object,N.bicluster =c(1:10),edge.by = "cell")
-```
-<img src="https://user-images.githubusercontent.com/26455910/90216577-ec8dbc00-ddcc-11ea-8f37-64dbab05e8ab.png" alt="metadata" width="600" height="300">
-
-3. Visualize bicluster 1 & bicluster 4 on heatmap.
-
-The diagonal pattern validates that bicluster 1 and bicluster 4 has different cell and gene components. Gene module in bicluster 1 may have a different function comparing to gene module in the bicluster 4.   
-```
-PlotHeatmap(object,N.bicluster = c(1,4),show.annotation = F)
-```
-<img src="https://user-images.githubusercontent.com/26455910/90216551-d41da180-ddcc-11ea-9ac2-ecf647912b25.png" alt="metadata" width="400" height="300">
 
 4. Functional enrichment analysis.
 

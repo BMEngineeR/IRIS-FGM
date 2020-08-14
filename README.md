@@ -26,7 +26,7 @@ R (equal or greater than 3.5)
 install.packages(c('BiocManager','devtools', 'AdaptGauss', "pheatmap", 'mixtools','MCL', 'anocva', 'qgraph','Rtools','ggpubr',"ggraph","Seurat"))
 ```
                    
-2. Install required package from Bioconductor:  
+2. Install required packages from Bioconductor:  
 
 ```
 BiocManager::install(c('org.Mm.eg.db','multtest','org.Hs.eg.db','clusterProfiler','DEsingle', 'DrImpute','scater', 'scran'))

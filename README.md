@@ -40,7 +40,8 @@ devtools::install_github("BMEngineeR/IRIS-FGM", force = T)
 Now the MetaQUBIC is successfully installed and ready for use. 
 ***
 ## Data preparation
-
+<details><summary>CLICK ME</summary>
+<p>
 1. Download example data from [Yan's RPKM 90 cell embroyonic single cell RNA-Seq data](https://bmbl.bmi.osumc.edu/downloadFiles/Yan_expression.txt), and [paper](https://www.nature.com/articles/nsmb.2660).
 
 2. Set the working directory where you put data and import the IRIS-FGM library.
@@ -48,9 +49,16 @@ Now the MetaQUBIC is successfully installed and ready for use.
 setwd("./my_working_dir/")
 library(IRISFGM)
 ```
+</p>
+</details>
 ***
 
+
+<details><summary>CLICK ME</summary>
+<p>
 ## Read in data.
+  <details><summary>CLICK ME</summary>
+<p>
 ```
 InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.names = 1)
 ```
@@ -58,11 +66,14 @@ InputMatrix <- read.table("./my_working_dir/Yan_expression.txt",header = T, row.
 IRIS-FGM also provides the function to read in 10X scRNA-Seq data format.
 
 Read HDF5 file```ReadFrom10X_h5()``` or read the folder which contain three files (barcode, sparse matrix, genes)```ReadFrom10X_folder()```
-
+</p>
+</details>
 ***
 
 ## Analysis data
 ### Data preprocessing and LTMG modeling
+<details><summary>CLICK ME</summary>
+<p>
 1. **Create IRIS-FGM object**:
 ```{r create_object, eval= FALSE, echo = TRUE,message=FALSE}
 object <- CreateIRISCEMObject(InputMatrix)
@@ -104,14 +115,18 @@ Here, we will use Left-truncated Mixture Gaussian distribution to model the regu
 ```{r run_LTMG, echo = TRUE,eval = FALSE}
 object <- RunLTMG(object, Gene_use = "all", seed = 123)
 ```
-### Biclustering
+</p>
+</details>
 
+### Biclustering
+<details><summary>CLICK ME</summary>
+<p>
 IRIS-FGM can provide biclustering function, which is based on our in-house novel algorithm, [QUBIC2] (https://github.com/maqin2001/qubic2) to predict functional gene module. 
 
-**Discretization & biclustering**  
+1. **Discretization & biclustering**  
 If you have more cells to analyze functional gene module you can use LTMG or Quantile based discretization ([QUBIC](https://academic.oup.com/nar/article/37/15/e101/2409951)). In this step, IRIS-FGM will generate some files in the local working directory.
 
-1. LTMG based discretization: 
+* LTMG based discretization: 
 
 It might take a lot of time if you have a large size of cells.
 ```
@@ -119,7 +134,7 @@ object <- CalBinaryMultiSignal(object)
 object <- RunBicluster(object, DiscretizationModel = "LTMG",OpenDual = FALSE,
                           NumBlockOutput = 100, BlockOverlap = 0.7, BlockCellMin = 15)
 ```
-2. Quantile based discretization: 
+* Quantile based discretization: 
 
 It might require users to adjust parameter q for deciding cutoff of binarizing. 
 ```
@@ -127,10 +142,10 @@ object <- RunDiscretization(object, q = 0.06)
 object <- RunBicluster(object, DiscretizationModel = "Quantile",OpenDual = TRUE, Extension = 0.90,
                           NumBlockOutput = 1000, BlockOverlap = 0.7, BlockCellMin = 15)
 ```
-**Analyzing functional gene module**
+2. **Analyzing functional gene module**
 This section is based on the quantile based discretization and biclustering results.
 
-1. Visualize the gene module-to-module relationship globally:
+* Visualize the gene module-to-module relationship globally:
 
 The figure via the number of overlap genes (controlled `edge.by = "gene"`) shows that bicluster 20, 23, 24, and 25 have similar gene components. Bicluster 21, 22, 25, and until bicluster 35 have similar gene components. In this figure, we can see gene modules in bicluster 20, 23, 24, and 25 may have a similar component and similar functionality, whereas the gene components from this gene module may differ from the other gene modules from the other biclusters (i.e., bicluster 21, 22, 25, and until bicluster 35)
 ```
@@ -139,7 +154,7 @@ PlotNetwork(object,N.bicluster =c(20:30), edge.by = "gene")
 
 <img src="https://user-images.githubusercontent.com/26455910/90253364-0819b680-de0f-11ea-91a6-a61e1df576e8.png" alt="metadata" width="600" height="300">
 
-2. Visualize bicluster 20 & bicluster 35 on heatmap.
+* Visualize bicluster 20 & bicluster 35 on heatmap.
 
 From step 1 in "Analysis functional gene module," we postulate gene components from bicluster 20, 23, 24, and 25 may differ from gene components from bicluster 21, 22, 25, and until bicluster 35. Therefore, in this section, we will focus on how the difference is. Therefore, we use bicluster 20 and bicluster 35 to generate heatmap and show such a difference.
 ```
@@ -148,17 +163,17 @@ PlotHeatmap(object,N.bicluster = c(20,35),show.annotation = F)
 <img src="https://user-images.githubusercontent.com/26455910/90255235-01d90980-de12-11ea-8469-8992f578ee4b.png" alt="metadata" width="400" height="300">
 
 
-3. Visualize local co-expression gene module network: 
+* Visualize local co-expression gene module network: 
 
 Since we already know the bicluster 20 and bicluster 35 showing the difference at the global level. We then will focus on a local gene module and investigate the co-expression gene network with in the module. Yellow nodes represent the gene module network from bicluster #20. The nodes' size indicates the degree of presence (the number of connected edges for one node). The thickness of edges suggests the value of the correlation coefficient. 
 
-* From this figure (bicluster 20, click the figure for zooming in), we can tell the EIFAD gene show a negative correlation (red color edge) to GOSR1 & BBS5, and show a positive correlation (grey edge) to ZNF394 & POTEM.
+  * From this figure (bicluster 20, click the figure for zooming in), we can tell the EIFAD gene show a negative correlation (red color edge) to GOSR1 & BBS5, and show a positive correlation (grey edge) to ZNF394 & POTEM.
 ```
 PlotModuleNetwork(object, N.bicluster = 20, cutoff=0.6, Node.color = "#E8E504")
 ```
 <img src="https://user-images.githubusercontent.com/26455910/90256029-1a95ef00-de13-11ea-87a4-a4302396df8e.png" alt="metadata" width="600" height="400">
 
-* From this figure (bicluster 35, click the figure for zooming in), we can tell the ROBO1 gene shows a negative correlation (red color edge) to NLRP4 & BPGM. GNPDA2 gene shows a positive correlation to BPGM, KIT, and CCDC25.
+  * From this figure (bicluster 35, click the figure for zooming in), we can tell the ROBO1 gene shows a negative correlation (red color edge) to NLRP4 & BPGM. GNPDA2 gene shows a positive correlation to BPGM, KIT, and CCDC25.
 ```
 PlotModuleNetwork(object, N.bicluster = 35, cutoff=0.6, Node.color = "#E8E504")
 ```
@@ -168,7 +183,7 @@ PlotModuleNetwork(object, N.bicluster = 35, cutoff=0.6, Node.color = "#E8E504")
 
 ISIR-FGM provide a functional enrichment analysis for a selected gene module. 
 
-1. For gene module from bicluster 20: 
+* For gene module from bicluster 20: 
 
 ```
 object <- RunPathway(object ,module.number =20, selected.gene.cutoff = 0.05, species = "Human", database = "GO", genes.source = "Bicluster")
@@ -184,7 +199,7 @@ object <- RunPathway(object ,module.number =20, selected.gene.cutoff = 0.05, spe
 | GO:0005484 | MF       | GO:0005484 | SNAP receptor activity        | 2/32      | 31/17697 | 0.001425497776329    | 0.0470414266188569 | 0.038513448693801  | STX11/GOSR1     | 2     |
 
 
-2. For gene module from bicluster 35: 
+* For gene module from bicluster 35: 
 
 ```
 object <- RunPathway(object ,module.number =35, selected.gene.cutoff = 0.05, species = "Human", database = "GO", genes.source = "Bicluster")
@@ -201,6 +216,8 @@ object <- RunPathway(object ,module.number =35, selected.gene.cutoff = 0.05, spe
 | GO:0005001 | MF       | GO:0005001 | transmembrane receptor protein tyrosine phosphatase activity | 2/32      | 17/17697  | 0.000423558866693072 | 0.0222368405013863 | 0.0164965032290986 | PTPRG/PTPRR                       | 2     |
 | GO:0019198 | MF       | GO:0019198 | transmembrane receptor protein phosphatase activity          | 2/32      | 17/17697  | 0.000423558866693072 | 0.0222368405013863 | 0.0164965032290986 | PTPRG/PTPRR                       | 2     |
 
-
+</p>
+</details>
+***
 
 

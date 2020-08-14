@@ -109,7 +109,7 @@ object <- RunLTMG(object, Gene_use = "all", seed = 123)
 IRIS-FGM can provide biclustering function, which is based on our in-house novel algorithm, [QUBIC2] (https://github.com/maqin2001/qubic2) to predict functional gene module. 
 
 **Discretization & biclustering**  
-If you have more cells to analyze functional gene module you can use LTMG or Quantile based discretization ([QUBIC](https://academic.oup.com/nar/article/37/15/e101/2409951)). In this step, IRIS-FGM will generate some files in the local working directory.
+If you have more cells to analyze functional gene module you can use LTMG or Quantile based discretization ([QUBIC](https://academic.oup.com/nar/article/37/15/e101/2409951)). In this step, IRIS-FGM will generate files in the local working directory and do not remove them before finishing your analysis (files include tmp_expression.txt, tmp_expression.txt.chars, tmp_expression.txt.chars.blocks, tmp_expression.txt.chars.chars, and tmp_expression.txt.rules).
 
 1. LTMG based discretization: 
 

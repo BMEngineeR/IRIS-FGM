@@ -84,7 +84,7 @@ Use `PlotMeta` and `SubsetData` together to filter out low-quality cells.
 ```{r plot_metadata,eval= TRUE, echo = TRUE}
 PlotMeta(object)
 ```
-<img src="https://user-images.githubusercontent.com/26455910/90202006-6eb8b900-ddaa-11ea-9bcd-38ec1401e88b.png" alt="metadata" width="400" height="400">
+<img src="https://user-images.githubusercontent.com/26455910/90322202-4acab400-df1f-11ea-95a7-94241338c7ca.png" alt="metadata" width="400" height="400">
 
 ```
 object <- SubsetData(object , nFeature.upper=15000,nFeature.lower=8000,

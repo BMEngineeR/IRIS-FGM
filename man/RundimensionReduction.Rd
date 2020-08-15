@@ -7,6 +7,7 @@
 \usage{
 .runDimensionReduction(
   object,
+  mat.source = c("LTMG", "UMImatrix"),
   reduction = "umap",
   dims = 1:15,
   perplexity = 15,
@@ -15,6 +16,8 @@
 }
 \arguments{
 \item{object}{input IRIS-FGM}
+
+\item{mat.source}{choose source data for running this function either from LTMG signal matrix or from processed data. Values of this parameter are "LTMG" and "UMImatrix"}
 
 \item{reduction}{select a method for dimension reduction, including umap, tsne, and pca.}
 

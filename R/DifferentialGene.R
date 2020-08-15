@@ -35,7 +35,7 @@ NULL
   group.2.idx <- readline(prompt="select index of group 2: ")
   group.1 <- tmp.group.table[tmp.group.table$index == group.1.idx, 2]
   group.2 <- tmp.group.table[tmp.group.table$index == group.2.idx, 2]
-  tmp.expression.table <- object@LTMG@LTMG_discrete
+  tmp.expression.table <- object@Processed_count[rownames(object@LTMG@LTMG_discrete),]
   if(group.2 == "rest of all") {
     new.condition <- as.character(tmp.ident)
     # set group in new condition

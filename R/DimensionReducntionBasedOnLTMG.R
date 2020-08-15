@@ -9,13 +9,22 @@ NULL
 #'
 #' @param reduction select a method for dimension reduction, including umap, tsne, and pca.
 #' @param dims select the number of PCs from PCA results to perform the following dimension reduction and cell clustering.
+#' @param mat.source choose source data for running this function either from LTMG signal matrix or from processed data. Values of this parameter are "LTMG" and "UMImatrix" 
 #' @name RundimensionReduction
 #' @importFrom Seurat CreateSeuratObject ScaleData RunPCA RunTSNE RunUMAP FindVariableFeatures
 #' @return This function will generate pca, tsne, or umap dimension reduction results.
 #' @examples dontrun{obejct <- RunDimensionReduction(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1)}
-.runDimensionReduction <- function(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1){
-  Tmp.seurat <- CreateSeuratObject(object@LTMG@LTMG_discrete)
-  Tmp.seurat<- ScaleData(Tmp.seurat)
+.runDimensionReduction <- function(object, mat.source = c("LTMG","UMImatrix"), reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1){
+  if(mat.source == "LTMG"){
+    Tmp.seurat <- CreateSeuratObject(object@LTMG@LTMG_discrete)
+    Tmp.seurat<- ScaleData(Tmp.seurat)
+  } else if(mat.source == "UMImatrix"){
+    Tmp.seurat <- CreateSeuratObject(object@Processed_count)
+    Tmp.seurat <- FindVariableFeatures(Tmp.seurat, selection.method = "vst", nfeatures = 2000)
+    Tmp.seurat <- ScaleData(Tmp.seurat)
+  } else {
+    stop("please select either LTMG or UMImatrix as input matrix")
+  }
   Tmp.seurat <- suppressMessages(RunPCA(Tmp.seurat, features = rownames(Tmp.seurat@assays$RNA)))
   object@LTMG@DimReduce@PCA <- Tmp.seurat@reductions$pca@cell.embeddings
   if(grepl("tsne", reduction, ignore.case = T) || grepl("umap", reduction, ignore.case = T)){
@@ -110,12 +119,12 @@ setMethod("RunClassification", "BRIC", .runClassification)
   names(tmp.ident) <- rownames(object@MetaInfo)
   # check name later add
   tmp.plot.table <- cbind.data.frame(tmp.plot.table,Cell_type=as.character(tmp.ident))
-  p.cluster <- ggplot(tmp.plot.table, aes(x= tmp.plot.table[,1],y = tmp.plot.table[,2]))
+  p.cluster <- ggplot(tmp.plot.table, aes(x= tmp.plot.table[,1],y = tmp.plot.table[,2],col=tmp.plot.table[,"Cell_type"]))
 
-  p.cluster <- p.cluster+geom_point(stroke=pt_size,size=pt_size,aes(col=tmp.plot.table[,"Cell_type"]))
+  p.cluster <- p.cluster+geom_point(stroke=pt_size,size=pt_size)
 
-  p.cluster <- p.cluster + guides(colour = guide_legend(override.aes = list(size=5))) + labs( color ="cell type")+ xlab("Dimension 1") + ylab("Dimentsion 2")
-  p.cluster <- p.cluster+theme_classic()
+  p.cluster <- p.cluster + guides(colour = guide_legend(override.aes = list(size=5))) + labs( color =colnames(object@MetaInfo)[ident.index])+ xlab("Dimension 1") + ylab("Dimentsion 2")
+  p.cluster <- p.cluster+theme_classic() 
   print(p.cluster)
 }
 

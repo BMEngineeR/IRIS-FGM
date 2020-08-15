@@ -10,7 +10,7 @@ RunPathway(object, ...)
 
 .runPathway(
   object = NULL,
-  module.number = NULL,
+  module.number = 1,
   selected.gene.cutoff = 0.05,
   species = "Human",
   database = "GO",
@@ -19,7 +19,7 @@ RunPathway(object, ...)
 
 \S4method{RunPathway}{BRIC}(
   object = NULL,
-  module.number = NULL,
+  module.number = 1,
   selected.gene.cutoff = 0.05,
   species = "Human",
   database = "GO",

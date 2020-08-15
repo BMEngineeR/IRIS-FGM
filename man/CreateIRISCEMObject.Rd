@@ -25,3 +25,6 @@ it should return a BRIC object of which structure can be found in tutorial.
 \description{
 Title
 }
+\examples{
+\dontrun{object <- CreateIRISCEMObject(x = input_matrix, min.cell = 0, min.gene =0}
+}

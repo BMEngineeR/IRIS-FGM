@@ -73,7 +73,7 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
   tmp.multi <- object@LTMG@LTMG_BinaryMultisignal
   tmp.multi <- cbind(ID = rownames(tmp.multi),tmp.multi)
   write.table(tmp.multi, file = tmp.dir, row.names = F, quote = F, sep = "\t")
-  print("finsished!")
+  print("finished!")
   print("running Bicluster . . .")
   qubic(i= tmp.dir, d = TRUE, C = OpenDual, c = Extension, o = NumBlockOutput, f= BlockOverlap, k = BlockCellMin)
 }

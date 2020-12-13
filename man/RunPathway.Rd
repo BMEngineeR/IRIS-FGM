@@ -3,23 +3,23 @@
 \name{RunPathway}
 \alias{RunPathway}
 \alias{.runPathway}
-\alias{RunPathway,BRIC-method}
+\alias{RunPathway,IRISFGM-method}
 \title{Functional enrichment analysis}
 \usage{
 RunPathway(object, ...)
 
 .runPathway(
   object = NULL,
-  module.number = 1,
+  N.bicluster = c(10, 11, 12, 13),
   selected.gene.cutoff = 0.05,
   species = "Human",
   database = "GO",
   genes.source = c("CTS", "Bicluster")
 )
 
-\S4method{RunPathway}{BRIC}(
+\S4method{RunPathway}{IRISFGM}(
   object = NULL,
-  module.number = 1,
+  N.bicluster = c(10, 11, 12, 13),
   selected.gene.cutoff = 0.05,
   species = "Human",
   database = "GO",
@@ -29,7 +29,7 @@ RunPathway(object, ...)
 \arguments{
 \item{object}{Input IRIS-FGM object}
 
-\item{module.number}{Select the numebr of bicluster to perform this function.}
+\item{N.bicluster}{Select the numebr of bicluster to perform this function.}
 
 \item{selected.gene.cutoff}{Set up a statistical significance cutoff for all identified DEGs.}
 
@@ -49,9 +49,9 @@ This function is also depended on clusterProfiler, AnnotationDbi, org.Mm.eg.db, 
 }
 \examples{
 # If you want to perform this function based on identified DEGs, you should use: 
-\dontrun{object <- RunPathway(object = NULL,module.number = NULL, selected.gene.cutoff = 0.05,
+\dontrun{object <- RunPathway(object = NULL,N.bicluster = NULL, selected.gene.cutoff = 0.05,
 species = "Human", database = "GO", genes.source = "CTS" }
 # If you want to perform this function based on the gene module from an identified bicluster, you should use: 
-\dontrun{object <- RunPathway(object = NULL,module.number = NULL, selected.gene.cutoff = 0.05,
+\dontrun{object <- RunPathway(object = NULL,N.bicluster = NULL, selected.gene.cutoff = 0.05,
 species = "Human", database = "GO", genes.source = "Bicluster" }
 }

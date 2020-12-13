@@ -2,14 +2,14 @@
 % Please edit documentation in R/generics.R, R/InputData.R
 \name{ReadFrom10X_folder}
 \alias{ReadFrom10X_folder}
-\alias{ReadFrom10X_folder,BRIC-method}
+\alias{ReadFrom10X_folder,IRISFGM-method}
 \title{Read 10X folder based on Seurat package}
 \usage{
 ReadFrom10X_folder(input.dir = NULL)
 
 ReadFrom10X_folder(input.dir = NULL)
 
-\S4method{ReadFrom10X_folder}{BRIC}(input.dir = NULL)
+\S4method{ReadFrom10X_folder}{IRISFGM}(input.dir = NULL)
 }
 \arguments{
 \item{Input.dir}{Input 10X Chromium output data by using output folder}

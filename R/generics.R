@@ -92,9 +92,14 @@ setGeneric(name = "RunClassification",
 
 
 #' @export
-#' @rdname FindMarkers
-setGeneric(name = "FindMarkers",
-           def =function(object, ...) standardGeneric("FindMarkers"))
+#' @rdname FindMarker
+setGeneric(name = "FindMarker",
+           def =function(object, ...) standardGeneric("FindMarker"))
+
+#' @export
+#' @rdname FindGlobalMarkers
+setGeneric(name = "FindGlobalMarkers",
+           def =function(object, ...) standardGeneric("FindGlobalMarkers"))
 
 #' @export
 #' @rdname RunPathway
@@ -120,6 +125,11 @@ setGeneric(name = "FindClassBasedOnMC",
 #' @rdname PlotNetwork
 setGeneric(name = "PlotNetwork",
            def =function(object, ...) standardGeneric("PlotNetwork"))
+
+#' @export
+#' @rdname DotPlotPathway
+setGeneric(name = "DotPlotPathway",
+           def =function(object, ...) standardGeneric("DotPlotPathway"))
 
 #' @export
 #' @rdname PlotMeta

@@ -2,14 +2,14 @@
 % Please edit documentation in R/generics.R, R/InputData.R
 \name{ReadFrom10X_h5}
 \alias{ReadFrom10X_h5}
-\alias{ReadFrom10X_h5,BRIC-method}
+\alias{ReadFrom10X_h5,IRISFGM-method}
 \title{Read 10X HDF5 file based on Seurat package}
 \usage{
 ReadFrom10X_h5(input = NULL, use.names = TRUE, unique.features = TRUE)
 
 ReadFrom10X_h5(input = NULL, use.names = TRUE, unique.features = TRUE)
 
-\S4method{ReadFrom10X_h5}{BRIC}(input = NULL, use.names = TRUE, unique.features = TRUE)
+\S4method{ReadFrom10X_h5}{IRISFGM}(input = NULL, use.names = TRUE, unique.features = TRUE)
 }
 \arguments{
 \item{input}{Input an HDF5 object}

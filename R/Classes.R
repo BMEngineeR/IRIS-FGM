@@ -41,7 +41,7 @@ setClass("LTMGr", slots = c(
   Tmp.seurat = "ANY"
 )
 )
-# set BRIC class
+# set IRISFGM class
 #'
 #' @slot raw_count matrix.
 #' @slot MetaInfo ANY.
@@ -52,10 +52,10 @@ setClass("LTMGr", slots = c(
 #'
 #' @return
 #' @export
-#' @name BRIC
-#' @rdname BRIC
-#' @exportClass BRIC
-setClass("BRIC",
+#' @name IRISFGM
+#' @rdname IRISFGM
+#' @exportClass IRISFGM
+setClass("IRISFGM",
          slots=c(Raw_count = "ANY",
                  Processed_count = "ANY",
                  MetaInfo = "ANY",
@@ -65,3 +65,10 @@ setClass("BRIC",
          )
 
 )
+
+setMethod(f = "show", signature = "IRISFGM", definition = function(object) {
+  cat("The data contain", "\n", nrow(object@Raw_count), "genes.\n",  ncol(object@Raw_count), "cells.")
+  cat("The data contain", "\n", nrow(object@Raw_count), "genes.\n",  ncol(object@Raw_count), "cells.")
+  invisible(x = NULL)
+})
+

@@ -3,7 +3,7 @@
 \name{PlotNetwork}
 \alias{PlotNetwork}
 \alias{.plotnetwork}
-\alias{PlotNetwork,BRIC-method}
+\alias{PlotNetwork,IRISFGM-method}
 \title{PlotNetwork}
 \usage{
 PlotNetwork(object, ...)
@@ -15,7 +15,7 @@ PlotNetwork(object, ...)
   N.bicluster = c(1:20)
 )
 
-\S4method{PlotNetwork}{BRIC}(
+\S4method{PlotNetwork}{IRISFGM}(
   object,
   edge.by = "gene",
   lay.out = "linear",

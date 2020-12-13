@@ -72,7 +72,7 @@ ReadFrom10X_h5<-function(input=NULL,use.names = TRUE, unique.features = TRUE){
 
 #' @rdname ReadFrom10X_h5
 #' @export
-setMethod("ReadFrom10X_h5", "BRIC", ReadFrom10X_h5)
+setMethod("ReadFrom10X_h5", "IRISFGM", ReadFrom10X_h5)
 
 
 #' Read 10X folder based on Seurat package
@@ -128,7 +128,7 @@ ReadFrom10X_folder <- function (input.dir = NULL)
 
 #' @rdname ReadFrom10X_folder
 #' @export
-setMethod("ReadFrom10X_folder", "BRIC", ReadFrom10X_folder)
+setMethod("ReadFrom10X_folder", "IRISFGM", ReadFrom10X_folder)
 
 
 

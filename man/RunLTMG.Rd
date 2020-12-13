@@ -3,14 +3,14 @@
 \name{RunLTMG}
 \alias{RunLTMG}
 \alias{.RunLTMG}
-\alias{RunLTMG,BRIC-method}
+\alias{RunLTMG,IRISFGM-method}
 \title{Run LTMG module}
 \usage{
 RunLTMG(object, ...)
 
 .RunLTMG(object, Gene_use = NULL, seed = 123, k = 5)
 
-\S4method{RunLTMG}{BRIC}(object, Gene_use = NULL, seed = 123, k = 5)
+\S4method{RunLTMG}{IRISFGM}(object, Gene_use = NULL, seed = 123, k = 5)
 }
 \arguments{
 \item{object}{Input IRIS-FGM object}

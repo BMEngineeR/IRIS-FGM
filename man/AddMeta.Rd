@@ -3,14 +3,14 @@
 \name{AddMeta}
 \alias{AddMeta}
 \alias{.addMeta}
-\alias{AddMeta,BRIC-method}
+\alias{AddMeta,IRISFGM-method}
 \title{Create addmeta function for adding meta information}
 \usage{
 AddMeta(object, ...)
 
 .addMeta(object = NULL, meta.info = NULL)
 
-\S4method{AddMeta}{BRIC}(object = NULL, meta.info = NULL)
+\S4method{AddMeta}{IRISFGM}(object = NULL, meta.info = NULL)
 }
 \arguments{
 \item{object}{input IRIS-FGM object}

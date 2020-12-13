@@ -3,24 +3,30 @@
 \name{PlotModuleNetwork}
 \alias{PlotModuleNetwork}
 \alias{.plotmodulenetwork}
-\alias{PlotModuleNetwork,BRIC-method}
+\alias{PlotModuleNetwork,IRISFGM-method}
 \title{PlotModuleNetwork}
 \usage{
 PlotModuleNetwork(object, ...)
 
 .plotmodulenetwork(
   object = NULL,
+  method = "spearman",
   N.bicluster = c(1, 5),
-  Node.color = "#E8E504",
-  cutoff = 0.7,
+  cutoff.neg = -0.8,
+  cutoff.pos = 0.95,
+  layout = "circle",
+  node.label = T,
   node.label.cex = 1
 )
 
-\S4method{PlotModuleNetwork}{BRIC}(
+\S4method{PlotModuleNetwork}{IRISFGM}(
   object = NULL,
+  method = "spearman",
   N.bicluster = c(1, 5),
-  Node.color = "#E8E504",
-  cutoff = 0.7,
+  cutoff.neg = -0.8,
+  cutoff.pos = 0.95,
+  layout = "circle",
+  node.label = T,
   node.label.cex = 1
 )
 }

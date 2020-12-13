@@ -18,15 +18,15 @@ NULL
 #' @importFrom Seurat as.sparse
 #' @importFrom DrImpute DrImpute
 
-.processData <- function(object = NULL, normalization = "LibrarySizeNormalization", IsImputation = FALSE, seed = 123){
+.processData <- function(object = NULL, normalization = "cpm",library.size = 100000, IsImputation = FALSE, seed = 123){
   if(is.null(object@MetaInfo)){stop("Can not find meta data, please run AddMeta")}
   Input <- object@Raw_count[,rownames(object@MetaInfo)]
   set.seed(seed)
   random.number <- sample(c(1:nrow(Input)),100)
   if(all(as.numeric(unlist(Input[random.number,]))%% 1== 0)){
     ## normalization##############################
-    if (grepl("librarysizenormalization", ignore.case = T,normalization)) {
-      my.normalized.data <- (Input/colSums(Input))*1000000
+    if (grepl("cpm", ignore.case = T,normalization)) {
+      my.normalized.data <- (Input/colSums(Input))*library.size
     } else if (grepl("scran", ignore.case = T,normalization)){
       sce <- SingleCellExperiment(assays = list(counts = Input))
       clusters <- quickCluster(sce,min.size = floor(ncol(Input)/3))
@@ -54,7 +54,7 @@ NULL
 
 #' @export
 #' @rdname ProcessData
-setMethod("ProcessData", "BRIC", .processData)
+setMethod("ProcessData", "IRISFGM", .processData)
 
 
 

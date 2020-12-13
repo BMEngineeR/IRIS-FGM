@@ -3,14 +3,14 @@
 \name{FindClassBasedOnMC}
 \alias{FindClassBasedOnMC}
 \alias{.final}
-\alias{FindClassBasedOnMC,BRIC-method}
+\alias{FindClassBasedOnMC,IRISFGM-method}
 \title{Markov Clustering}
 \usage{
 FindClassBasedOnMC(object, ...)
 
 .final(object = NULL, method = "MCL", K = 5)
 
-\S4method{FindClassBasedOnMC}{BRIC}(object = NULL, method = "MCL", K = 5)
+\S4method{FindClassBasedOnMC}{IRISFGM}(object = NULL, method = "MCL", K = 5)
 }
 \arguments{
 \item{object}{input IRIS-FGM object}

@@ -3,7 +3,7 @@
 \name{SubsetData}
 \alias{SubsetData}
 \alias{.subset_data}
-\alias{SubsetData,BRIC-method}
+\alias{SubsetData,IRISFGM-method}
 \title{Subset data by number of count and numebr of gene.}
 \usage{
 SubsetData(object, ...)
@@ -16,7 +16,7 @@ SubsetData(object, ...)
   Counts.lower = -Inf
 )
 
-\S4method{SubsetData}{BRIC}(
+\S4method{SubsetData}{IRISFGM}(
   object,
   nFeature.upper = Inf,
   nFeature.lower = -Inf,

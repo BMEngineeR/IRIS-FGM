@@ -3,21 +3,23 @@
 \name{ProcessData}
 \alias{ProcessData}
 \alias{.processData}
-\alias{ProcessData,BRIC-method}
+\alias{ProcessData,IRISFGM-method}
 \title{Process data}
 \usage{
 ProcessData(object, ...)
 
 .processData(
   object = NULL,
-  normalization = "LibrarySizeNormalization",
+  normalization = "cpm",
+  library.size = 1e+05,
   IsImputation = FALSE,
   seed = 123
 )
 
-\S4method{ProcessData}{BRIC}(
+\S4method{ProcessData}{IRISFGM}(
   object = NULL,
-  normalization = "LibrarySizeNormalization",
+  normalization = "cpm",
+  library.size = 1e+05,
   IsImputation = FALSE,
   seed = 123
 )

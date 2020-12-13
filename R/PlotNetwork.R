@@ -54,12 +54,12 @@ NULL
   edge.list <- graph_from_adjacency_matrix(adjmatrix =ntwork.adjacency.mtx ,mode = "undirected",weighted = T,diag = F)
   label = rownames(ntwork.adjacency.mtx)
   p<- ggraph(edge.list, layout = lay.out) +
-    geom_node_point() +
-    geom_edge_arc(aes(width = weight), alpha = 0.8) +
-    scale_edge_width(range = c(0.2, 2)) +
+    geom_node_point(size=5,color = "gray50") +
+    geom_edge_arc(aes(width = weight), alpha = 0.8,color = "orange") +
+    scale_edge_width(range = c(0.5, 2)) +
     geom_node_text(aes(label = label), repel = TRUE) +
     labs(edge_width = edge.by) +
-    theme_graph()
+    theme_void()
   print(p)
 }
 
@@ -67,7 +67,7 @@ NULL
 #' @rdname PlotNetwork
 #' @export
 #'
-setMethod("PlotNetwork","BRIC", .plotnetwork)
+setMethod("PlotNetwork","IRISFGM", .plotnetwork)
 
 
 
@@ -120,41 +120,54 @@ setMethod("PlotNetwork","BRIC", .plotnetwork)
 #' @param N.bicluster number of biclsuter to plot.
 #' @param Node.color color of nodes. This parameter also accepts color codes, e.g. "#AE1503" or "darkred."
 #' @param cutoff this parameter decide the cutoff of correlation
-#' @importFrom igraph graph.adjacency degree
-#' @import qgraph
+#' @importFrom igraph graph_from_adjacency_matrix degree
+#' @import ggraph dplyr
 #' @return
 #' @name PlotModuleNetwork
 #'
 #' @examples \dontrun{object <- PlotModuleNetwork(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504", cutoff=0.7, node.label.cex = 1 )}
-.plotmodulenetwork <- function(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504",cutoff=0.7, node.label.cex = 1 ){
-  my.list <- .generateNetObject(object =object,N.bicluster=N.bicluster )
+.plotmodulenetwork <- function(object = NULL, 
+                               method = "spearman",
+                               N.bicluster = c(1,5), 
+                               cutoff.neg = -0.80, 
+                               cutoff.pos = 0.95,
+                               layout = "circle",
+                               node.label = T,
+                               node.label.cex = 1 ){
+  my.list <- .generateNetObject(object =object,N.bicluster=N.bicluster,method = method)
   cort <- my.list[[1]]
-  my.adjacency <- ifelse(abs(cort)< cutoff ,0,cort)
-  g <- graph.adjacency(my.adjacency,weighted = T,diag = F,mode ="undirected" )
-  degree.normalize <- 4*(degree(g)/max(degree(g)))
-  a<- my.list
+  my.adjacency <- ifelse(cort < cutoff.neg | cort > cutoff.pos, cort , 0)
+  g <- graph_from_adjacency_matrix(my.adjacency,weighted = T,diag = F,mode ="undirected")
+  if (length(N.bicluster)>1){
+    vertex.attributes(g)$Bicluster <- c(rep(names(my.list[[2]][1]),length(my.list[[2]][[1]])),
+                                        rep(names(my.list[[2]][2]),length(my.list[[2]][[2]])),
+                                        rep(names(my.list[[2]][3]),length(my.list[[2]][[3]])),
+                                        rep(names(my.list[[2]][4]),length(my.list[[2]][[4]])))
+  }
   if (length(N.bicluster)==1){
-    qgraph(a[[1]], groups = a[[2]],
-           theme = "classic",cut =0,
-           layout = "circle", minimum = 0.5, posCol=c("grey"), negCol="darkred",
-           # barLength = 0.5,
-           legend.cex = 0.7, color = Node.color,vsize = degree.normalize,vsize2= degree.normalize,label.scale.equal=F,
-           vTrans = 200,label.cex =node.label.cex,labels = rownames(a[[1]]),label.scale=F)
+    vertex.attributes(g)$Bicluster <- rep(names(my.list[[2]][1]),length(my.list[[2]][[1]]))
   }
-  if (length(N.bicluster)==2){
-    qgraph(a[[1]], groups = a[[2]],
-           theme = "classic",cut =0,
-           layout = "spring", minimum = 0.5, posCol="grey", negCol="darkred",
-           # barLength = 0.5,
-           legend.cex = 0.7, color = c("#AE1503", "#012290", "#908E03", "#808080"),vsize = degree.normalize,vsize2= degree.normalize, vTrans = 200,label.cex =node.label.cex,label.scale=F)
-  }
+  edge.attributes(g)$status <- ifelse(edge.attributes(g)$weight < 0,"negative","positive")
+  degree_number <- degree(g)
+  layout <- create_layout(g , layout = layout)
+  # create color panel
+  p.base <- ggraph(layout)
+  p.base <- p.base + geom_node_point(aes(size=degree_number,alpha=degree_number),color = "orange")
+  if (node.label == T){
+    p.base <- p.base + geom_node_text(aes(label =name,size = node.label.cex),repel = T)
+    }
+  p.base <-  p.base + geom_edge_link0(aes(width = abs(weight),color = status), alpha = 1)+
+             scale_edge_width(range = c(0.5, 2)) + 
+             coord_fixed()+
+             theme_void()
+  print(p.base)
 }
 
 
 #' @rdname PlotModuleNetwork
 #' @export
 #'
-setMethod("PlotModuleNetwork","BRIC", .plotmodulenetwork)
+setMethod("PlotModuleNetwork","IRISFGM", .plotmodulenetwork)
 
 
 

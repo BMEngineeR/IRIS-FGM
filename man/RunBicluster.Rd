@@ -3,7 +3,7 @@
 \name{RunBicluster}
 \alias{RunBicluster}
 \alias{.runBicluster}
-\alias{RunBicluster,BRIC-method}
+\alias{RunBicluster,IRISFGM-method}
 \title{Run cluster}
 \usage{
 RunBicluster(object, ...)
@@ -18,7 +18,7 @@ RunBicluster(object, ...)
   BlockCellMin = 15
 )
 
-\S4method{RunBicluster}{BRIC}(
+\S4method{RunBicluster}{IRISFGM}(
   object = NULL,
   DiscretizationModel = "Quantile",
   OpenDual = FALSE,

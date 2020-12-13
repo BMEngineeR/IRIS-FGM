@@ -164,7 +164,7 @@ CLUSTERING <- function(Raw,blocks,method='MCL',K=NULL){
 }
 #' @rdname FindClassBasedOnMC
 #' @export
-setMethod("FindClassBasedOnMC","BRIC",.final)
+setMethod("FindClassBasedOnMC","IRISFGM",.final)
 
 
 

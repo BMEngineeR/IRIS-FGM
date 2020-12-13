@@ -3,14 +3,14 @@
 \name{PlotDimension}
 \alias{PlotDimension}
 \alias{.plotDimension}
-\alias{PlotDimension,BRIC-method}
+\alias{PlotDimension,IRISFGM-method}
 \title{Visualize dimension reduction results}
 \usage{
 PlotDimension(object, ...)
 
 .plotDimension(object, reduction = "umap", pt_size = 1)
 
-\S4method{PlotDimension}{BRIC}(object, reduction = "umap", pt_size = 1)
+\S4method{PlotDimension}{IRISFGM}(object, reduction = "umap", pt_size = 1)
 }
 \arguments{
 \item{object}{Input IRIS-FGM Object}

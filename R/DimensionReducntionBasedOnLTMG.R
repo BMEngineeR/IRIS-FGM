@@ -13,7 +13,13 @@ NULL
 #' @name RundimensionReduction
 #' @importFrom Seurat CreateSeuratObject ScaleData RunPCA RunTSNE RunUMAP FindVariableFeatures
 #' @return This function will generate pca, tsne, or umap dimension reduction results.
-#' @examples dontrun{obejct <- RunDimensionReduction(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1)}
+#' @examples \dontrun{
+#' obejct <- RunDimensionReduction(object,
+#'    mat.source= "LTMG",
+#'    reduction = "umap", 
+#'    dims = 1:15 ,
+#'    perplexity = 15, 
+#'    seed = 1)}
 .runDimensionReduction <- function(object, mat.source = c("LTMG","UMImatrix"), reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1){
   if(mat.source == "LTMG"){
     Tmp.seurat <- CreateSeuratObject(object@LTMG@LTMG_discrete)
@@ -45,7 +51,7 @@ return(object)
 
 #' @rdname RunDimensionRecution
 #' @export
-setMethod("RunDimensionReduction", "BRIC", .runDimensionReduction)
+setMethod("RunDimensionReduction", "IRISFGM", .runDimensionReduction)
 
 
 
@@ -66,12 +72,11 @@ setMethod("RunDimensionReduction", "BRIC", .runDimensionReduction)
   if ( is.null(object@LTMG@Tmp.seurat)) {stop("There is no temporary seurat obejct getting detected. \n Try to run RundimensionRuduction first.")}
   Tmp.seurat <- object@LTMG@Tmp.seurat
   Tmp.seurat <- FindNeighbors(Tmp.seurat,dims=dims, k.param = k.param)
-  # Seurat::ElbowPlot(Tmp.seurat, ndims = length(dims)+5)
   Tmp.seurat <- FindClusters(Tmp.seurat, resolution = resolution, algorithm = algorithm)
   tmp.meta <- object@MetaInfo
   tmp.colname <- colnames(tmp.meta)
   res.index <- grep(paste0("res.",resolution),colnames(Tmp.seurat@meta.data))
-  tmp.colname <- c(tmp.colname,paste0("Seurat",resolution) )
+  tmp.colname <- c(tmp.colname,paste0("Seurat",resolution))
   tmp.meta <- cbind(tmp.meta, Tmp.seurat@meta.data[,res.index])
   colnames(tmp.meta) <- tmp.colname
   object@MetaInfo <- tmp.meta
@@ -81,7 +86,7 @@ setMethod("RunDimensionReduction", "BRIC", .runDimensionReduction)
 
 #' @rdname RunDimensionRecution
 #' @export
-setMethod("RunClassification", "BRIC", .runClassification)
+setMethod("RunClassification", "IRISFGM", .runClassification)
 
 
 
@@ -124,13 +129,13 @@ setMethod("RunClassification", "BRIC", .runClassification)
   p.cluster <- p.cluster+geom_point(stroke=pt_size,size=pt_size)
 
   p.cluster <- p.cluster + guides(colour = guide_legend(override.aes = list(size=5))) + labs( color =colnames(object@MetaInfo)[ident.index])+ xlab("Dimension 1") + ylab("Dimentsion 2")
-  p.cluster <- p.cluster+theme_classic() 
+  p.cluster <- p.cluster+theme_classic() + coord_fixed()
   print(p.cluster)
 }
 
 #' @rdname PlotDimension
 #' @export
-setMethod("PlotDimension", "BRIC", .plotDimension)
+setMethod("PlotDimension", "IRISFGM", .plotDimension)
 
 
 

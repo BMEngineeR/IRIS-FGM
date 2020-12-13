@@ -3,14 +3,14 @@
 \name{PlotMeta}
 \alias{PlotMeta}
 \alias{.plotMeta}
-\alias{PlotMeta,BRIC-method}
+\alias{PlotMeta,IRISFGM-method}
 \title{Generate violin plot based on meta data.}
 \usage{
 PlotMeta(object, ...)
 
 .plotMeta(object = NULL)
 
-\S4method{PlotMeta}{BRIC}(object = NULL)
+\S4method{PlotMeta}{IRISFGM}(object = NULL)
 }
 \arguments{
 \item{object}{input IRIS-FGM object}

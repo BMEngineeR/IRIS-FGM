@@ -61,7 +61,7 @@ NULL
 
 #' @export
 #' @rdname RunDiscretization
-setMethod("RunDiscretization", "BRIC", .runDiscretization)
+setMethod("RunDiscretization", "IRISFGM", .runDiscretization)
 
 #' RunBicusterBaseOnLTMG
 #'
@@ -125,7 +125,7 @@ setMethod("RunDiscretization", "BRIC", .runDiscretization)
 }
 #' @export
 #' @rdname RunBicluster
-setMethod("RunBicluster", "BRIC", .runBicluster)
+setMethod("RunBicluster", "IRISFGM", .runBicluster)
 
 
 

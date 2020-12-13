@@ -30,5 +30,5 @@ This function will generate pca, tsne, or umap dimension reduction results.
 This function is based on the Seurat package to perform dimension reduction. The input matirx is the LTMG signaling matrix.
 }
 \examples{
-dontrun{obejct <- RunDimensionReduction(object, reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1)}
+dontrun{obejct <- RunDimensionReduction(object,mat.source= "LTMG", reduction = "umap", dims = 1:15 ,perplexity = 15, seed = 1)}
 }

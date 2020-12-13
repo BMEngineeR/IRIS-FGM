@@ -3,7 +3,7 @@
 \name{PlotHeatmap}
 \alias{PlotHeatmap}
 \alias{.plotHeatmap}
-\alias{PlotHeatmap,BRIC-method}
+\alias{PlotHeatmap,IRISFGM-method}
 \title{plot heatmap based on bicluster}
 \usage{
 PlotHeatmap(object, ...)
@@ -13,19 +13,21 @@ PlotHeatmap(object, ...)
   N.bicluster = c(1, 5),
   show.overlap = F,
   seed = 123,
-  show.annotation = F
+  show.annotation = F,
+  show.clusters = F
 )
 
-\S4method{PlotHeatmap}{BRIC}(
+\S4method{PlotHeatmap}{IRISFGM}(
   object = object,
   N.bicluster = c(1, 5),
   show.overlap = F,
   seed = 123,
-  show.annotation = F
+  show.annotation = F,
+  show.clusters = F
 )
 }
 \arguments{
-\item{object}{BRIC object}
+\item{object}{IRISFGM object}
 
 \item{N.bicluster}{number of biclusters}
 

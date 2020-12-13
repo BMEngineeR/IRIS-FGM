@@ -347,7 +347,7 @@ LTMG<-function(VEC,Zcut_G,k=5){
 
 #' @export
 #' @rdname RunLTMG
-setMethod("RunLTMG","BRIC", .RunLTMG)
+setMethod("RunLTMG","IRISFGM", .RunLTMG)
 #----------------------------------------------------------------------------
 
 #' Get LTMG matrix
@@ -363,7 +363,7 @@ setMethod("RunLTMG","BRIC", .RunLTMG)
 
 #' @export
 #' @rdname GetLTMGmatrix
-setMethod("GetLTMGmatrix", "BRIC", .GetLTMGmatrix)
+setMethod("GetLTMGmatrix", "IRISFGM", .GetLTMGmatrix)
 # --------------------------------------------------
 
 # calculate single signal function and get function ---------------------
@@ -375,7 +375,7 @@ setMethod("GetLTMGmatrix", "BRIC", .GetLTMGmatrix)
 }
 #' @export
 #' @rdname CalBinarySingleSignal
-setMethod("CalBinarySingleSignal", "BRIC", .CalBinarySingleSignal)
+setMethod("CalBinarySingleSignal", "IRISFGM", .CalBinarySingleSignal)
 
 .GetBinarySingleSignal <- function(object = NULL) {
   tmp <- object@LTMG@LTMG_BinarySingleSignal
@@ -384,7 +384,7 @@ setMethod("CalBinarySingleSignal", "BRIC", .CalBinarySingleSignal)
 
 #' @export
 #' @rdname GetBinarySingleSignal
-setMethod("GetBinarySingleSignal", "BRIC", .GetBinarySingleSignal)
+setMethod("GetBinarySingleSignal", "IRISFGM", .GetBinarySingleSignal)
 # --------------------------------------------------------------------------
 # calculate multisignal function and get function--------------------------
 #' calculate multisignal
@@ -421,7 +421,7 @@ setMethod("GetBinarySingleSignal", "BRIC", .GetBinarySingleSignal)
 
 #' @export
 #' @rdname CalBinaryMultiSignal
-setMethod("CalBinaryMultiSignal", "BRIC", .CalBinaryMultiSignal)
+setMethod("CalBinaryMultiSignal", "IRISFGM", .CalBinaryMultiSignal)
 
 #' Get multisignal binary matrix
 #' This function is for getting multisignal from LTMG signaling matrix.
@@ -437,7 +437,7 @@ setMethod("CalBinaryMultiSignal", "BRIC", .CalBinaryMultiSignal)
 
 #' @export
 #' @rdname GetBinaryMultiSignal
-setMethod("GetBinaryMultiSignal", "BRIC", .GetBinaryMultiSignal)
+setMethod("GetBinaryMultiSignal", "IRISFGM", .GetBinaryMultiSignal)
 
 
 

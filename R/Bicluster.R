@@ -46,12 +46,15 @@ NULL
 #' @return It will generate quantile based binary matrix.
 .runDiscretization <- function(object = NULL, q = 0.06, LogTransformation = FALSE) {
     message("writing temporary expression file ...")
-    tmp.dir <- paste0(getwd(), "/tmp_expression.txt")
-    tmp.count <- object@Processed_count
-    tmp.count <- cbind(ID = rownames(tmp.count), tmp.count)
-    write.table(tmp.count, file = tmp.dir, row.names = F, quote = F, sep = "\t")
-    message("create temporary discretize file")
-    qubic(i = tmp.dir, Fa = TRUE, q = q, R = LogTransformation)
+    if(!file.exists(paste0(getwd(), "tmp_expression.txt.chars"))){
+        tmp.dir <- paste0(getwd(), "/tmp_expression.txt")
+        tmp.count <- object@Processed_count
+        tmp.count <- cbind(ID = rownames(tmp.count), tmp.count)
+        write.table(tmp.count, file = tmp.dir, row.names = F, quote = F, sep = "\t")
+        message("create temporary discretize file")
+        tmp.dir <- paste0(getwd(), "/tmp_expression.txt")
+        qubic(i = tmp.dir, Fa = TRUE, q = q, R = LogTransformation)
+    }
     tmp.chars <- paste0(getwd(), "/tmp_expression.txt.chars")
     tmp.readin <- read.table(tmp.chars, row.names = 1, header = T)
     object@Discretization <- as.matrix(tmp.readin)

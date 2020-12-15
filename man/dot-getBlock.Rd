@@ -7,7 +7,7 @@
 .getBlock(object = NULL, keyword = "Conds")
 }
 \arguments{
-\item{keyword}{"Conds" for co-regulatory or "Genes" for co-expression gene}
+\item{keyword}{'Conds' for co-regulatory or 'Genes' for co-expression gene}
 }
 \description{
 get block from generated temporal files

@@ -21,5 +21,5 @@ The output from \code{\link{Read10X}}
 This function provide a method for reading in a folder from 10X platform. In this folder, it should contain three files: barcode, matrix, and gene.
 }
 \examples{
-\dontrun{input_mat <- ReadFrom10X_folder(input.dir = "my_path_to_folder")}
+\dontrun{input_mat <- ReadFrom10X_folder(input.dir = 'my_path_to_folder')}
 }

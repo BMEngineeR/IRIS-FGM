@@ -35,7 +35,7 @@ PlotModuleNetwork(object, ...)
 
 \item{N.bicluster}{number of biclsuter to plot.}
 
-\item{Node.color}{color of nodes. This parameter also accepts color codes, e.g. "#AE1503" or "darkred."}
+\item{Node.color}{color of nodes. This parameter also accepts color codes, e.g. '#AE1503' or 'darkred.'}
 
 \item{cutoff}{this parameter decide the cutoff of correlation}
 }
@@ -46,5 +46,5 @@ PlotModuleNetwork(object, ...)
 This function will visualize co-expression gene network based on coorelation analysis. The nodes represent the gene module network from the selected bicluster. The size of the nodes indicates the degree of presence. The thickness of edges indicates the value of the correlation coefficient.
 }
 \examples{
-\dontrun{object <- PlotModuleNetwork(object = NULL, N.bicluster = c(1,5), Node.color = "#E8E504", cutoff=0.7, node.label.cex = 1 )}
+\dontrun{object <- PlotModuleNetwork(object = NULL, N.bicluster = c(1,5), Node.color = '#E8E504', cutoff=0.7, node.label.cex = 1 )}
 }

@@ -27,5 +27,5 @@ We will use Left-truncated Mixture Gaussian distribution to model the regulatory
 # If you want to explore DEG, we recommend you should use top 2000 highly variant gene. 
 \dontrun{object <- RunLTMG(object,Gene_use = 2000, seed = 123, k = 5)}
 # If you want to run bicluster based on LTMG model, we recommend you should use all genes.
-\dontrun{object <- RunLTMG(object,Gene_use ="all", seed = 123, k = 5)}
+\dontrun{object <- RunLTMG(object,Gene_use ='all', seed = 123, k = 5)}
 }

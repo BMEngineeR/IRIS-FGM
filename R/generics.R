@@ -75,9 +75,6 @@ setGeneric(name = "RunClassification", def = function(object, ...) standardGener
 #' @rdname FindMarker
 setGeneric(name = "FindMarker", def = function(object, ...) standardGeneric("FindMarker"))
 
-#' @export
-#' @rdname FindGlobalMarkers
-setGeneric(name = "FindGlobalMarkers", def = function(object, ...) standardGeneric("FindGlobalMarkers"))
 
 #' @export
 #' @rdname RunPathway

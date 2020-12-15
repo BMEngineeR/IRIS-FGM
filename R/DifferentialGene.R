@@ -78,11 +78,12 @@ setMethod("FindMarker", "IRISFGM", .findMarker)
 #' @param random.seed
 #' @param min.pct
 #' @name FindGlobalMarkers
+#' @export
 #' @return Output is a differentially expressed gene list
 #' @importFrom Seurat Idents FindAllMarkers AddMetaData Idents<-
 #'
 #' @examples \dontrun{Global_marker <- FindGlobalMarkers(object)}
-.findglobalMarkers <- function(object = NULL, idents = "Seurat0.6", logfc.threshold = 0.25, test.use = "wilcox", only.pos = TRUE, random.seed = 1, min.pct = 0.1) {
+FindGlobalMarkers <- function(object = NULL, idents = "Seurat0.6", logfc.threshold = 0.25, test.use = "wilcox", only.pos = TRUE, random.seed = 1, min.pct = 0.1) {
     tmp.seurat <- object@LTMG@Tmp.seurat
     tmp.seurat <- AddMetaData(tmp.seurat, metadata = object@MetaInfo)
     if (!idents %in% colnames(object@MetaInfo)) {
@@ -93,9 +94,6 @@ setMethod("FindMarker", "IRISFGM", .findMarker)
     return(tmp.all.marker)
 }
 
-#' @rdname FindGlobalMarkers
-#' @export
-setMethod("FindGlobalMarkers", "IRISFGM", .findglobalMarkers)
 
 
 #' PlotMarkerHeatmap will visualize global marker
@@ -112,7 +110,10 @@ setMethod("FindGlobalMarkers", "IRISFGM", .findglobalMarkers)
 #' @export
 #' @import colorspace
 #' @examples 
-PlotMarkerHeatmap <- function(Globalmarkers = NULL, idents = "Seurat0.6", top.gene = 50, p.adj = 0.05, scale = "row") {
+PlotMarkerHeatmap <- function(Globalmarkers = NULL,object = NULL , 
+                              idents = "Seurat0.6", top.gene = 50,
+                              p.adj = 0.05, scale = "row",
+                              cex = 1) {
     marker.list <- Globalmarkers
     marker.list <- marker.list[marker.list$p_val_adj < p.adj, ]
     marker.cluster.index <- as.data.frame(cbind(index = 1:length(unique(marker.list$cluster)), cluster = unique(as.character(marker.list$cluster))), stringsAsFactors = F)
@@ -133,13 +134,14 @@ PlotMarkerHeatmap <- function(Globalmarkers = NULL, idents = "Seurat0.6", top.ge
     } else {
         col.data <- my.cluster$cluster
     }
+    sub.marker.list <- as.data.frame(na.omit( sub.marker.list))
     heatmap.matrix <- object@Processed_count[sub.marker.list$gene, as.character(my.cluster$cell)]
     heatmap.matrix <- na.omit(heatmap.matrix)
     colSide <- qualitative_hcl(length(unique(col.data)), palette = "Dynamic")[col.data]
     colMain <- colorRampPalette(c("#2D80BD", "#DCEAF5", "#B0390C"))(100)
     heatmap(as.matrix(heatmap.matrix), Colv = NA, Rowv = NA, scale = scale, ColSideColors = colSide, col = colMain, labCol = "0")
     legend("topright", legend = c(unique(as.character(my.cluster$cluster))), bg = "transparent", pch = rep(19, length(unique(col.data))), col = qualitative_hcl(length(unique(col.data)), 
-        palette = "Dynamic")[unique(my.cluster$cluster)], cex = 2, box.lty = 0)
+        palette = "Dynamic")[unique(my.cluster$cluster)], cex = 2, box.lty = 0,ncol = 2)
     
 }
 

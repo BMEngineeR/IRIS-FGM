@@ -10,7 +10,7 @@ NULL
 #' @param reduction select a method for dimension reduction, including umap, tsne, and pca.
 #' @param dims select the number of PCs from PCA results to perform the following dimension reduction and cell clustering.
 #' @param mat.source choose source data for running this function either from LTMG signal matrix or from processed data. Values of this parameter are 'LTMG' and 'UMImatrix' 
-#' @name RundimensionReduction
+#' @name RunDimensionReduction
 #' @importFrom Seurat CreateSeuratObject ScaleData RunPCA RunTSNE RunUMAP FindVariableFeatures
 #' @return This function will generate pca, tsne, or umap dimension reduction results.
 #' @examples \dontrun{
@@ -50,7 +50,7 @@ NULL
 }
 
 
-#' @rdname RunDimensionRecution
+#' @rdname RunDimensionReduction
 #' @export
 setMethod("RunDimensionReduction", "IRISFGM", .runDimensionReduction)
 
@@ -63,7 +63,7 @@ setMethod("RunDimensionReduction", "IRISFGM", .runDimensionReduction)
 #' @param k.param Defines k for the k-nearest neighbor algorithm.
 #' @param resolution Value of the resolution parameter, use a value above (below) 1.0 if you want to obtain a larger (smaller) number of communities.
 #' @param algorithm Algorithm for modularity optimization (1 = original Louvain algorithm; 2 = Louvain algorithm with multilevel refinement; 3 = SLM algorithm; 4 = Leiden algorithm). Leiden requires the leidenalg python.
-#' @param dims \tDimensions of reduction to use as input.
+#' @param dims Dimensions of reduction to use as input.
 #' @name RunClassification
 #' @importFrom Seurat FindNeighbors FindClusters
 #' @import ggplot2

@@ -15,8 +15,8 @@ DotPlotPathway(object, ...)
 \arguments{
 \item{object}{Input IRIS-FGM object}
 
-\item{genes.source}{decide the plot source either "CTS" or "Bicluster." "CTS" means from cell-type-specific DEGs, 
-and "Bicluster means using gene module from the selected bicluster."}
+\item{genes.source}{decide the plot source either 'CTS' or 'Bicluster.' 'CTS' means from cell-type-specific DEGs, 
+and 'Bicluster means using gene module from the selected bicluster.'}
 }
 \value{
 dot plot

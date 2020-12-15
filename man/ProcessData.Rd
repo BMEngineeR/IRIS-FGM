@@ -27,7 +27,7 @@ ProcessData(object, ...)
 \arguments{
 \item{object}{}
 
-\item{normalization}{two options: (1)library size noralization by using library size factor: 1e6, equal to CPM, or (2) using "scran" normalization method.}
+\item{normalization}{two options: (1)library size noralization by using library size factor: 1e6, equal to CPM, or (2) using 'scran' normalization method.}
 
 \item{IsImputation}{imputation method is provided by DrImpute. Default is FALSE.}
 

@@ -7,10 +7,12 @@ This function will generate global marker gene heatmap}
 \usage{
 PlotMarkerHeatmap(
   Globalmarkers = NULL,
+  object = NULL,
   idents = "Seurat0.6",
   top.gene = 50,
   p.adj = 0.05,
-  scale = "row"
+  scale = "row",
+  cex = 1
 )
 }
 \arguments{

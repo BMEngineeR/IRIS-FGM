@@ -12,7 +12,7 @@ NULL
 #' @name PlotHeatmap
 #' @import pheatmap
 #' @import Polychrome RColorBrewer
-.plotHeatmap <- function(object = object, N.bicluster = c(1, 5), show.overlap = F, seed = 123, show.annotation = F, show.clusters = F) {
+.plotHeatmap <- function(object = object, N.bicluster = c(1, 5), show.overlap = F, seed = 123, show.annotation = T, show.clusters = F) {
     vec.boolean <- vector(mode = "logical")
     for (i in seq_along(N.bicluster)) {
         vec.boolean[i] <- is.double(N.bicluster[i])

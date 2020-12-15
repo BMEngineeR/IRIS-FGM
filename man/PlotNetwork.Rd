@@ -25,7 +25,7 @@ PlotNetwork(object, ...)
 \arguments{
 \item{object}{Input object}
 
-\item{edge.by}{This parameter decide the edge by "cell" or by "gene". The default value is by gene.}
+\item{edge.by}{This parameter decide the edge by 'cell' or by 'gene'. The default value is by gene.}
 
 \item{lay.out}{The type of layout to create, include linear (default), circle, kk.}
 }
@@ -37,5 +37,5 @@ This function is for building the module- module network. Nodes mean individual 
 The weight of line show the number of gene (or cell).
 }
 \examples{
-\dontrun{object <- PlotNetwork(object,edge.by = "gene",N.bicluster =c(1:20) )}
+\dontrun{object <- PlotNetwork(object,edge.by = 'gene',N.bicluster =c(1:20) )}
 }

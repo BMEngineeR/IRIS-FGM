@@ -146,7 +146,7 @@ object <- SubsetData(object , nFeature.upper=15000,nFeature.lower=8000,
 
 User can choose perform normalization or imputation based on their need. The normalization method has two options, one is the simplist CPM normalization (default `normalization = 'LibrarySizeNormalization'`). The other is from package scran and can be opened by using parameter `normalization = 'scran'`, . The imputation method is from package DrImpute and can be opened by using parameter `IsImputation = TRUE` (default as closed).
 ```{r ProcessData,echo = TRUE, eval= FALSE}
-object <- ProcessData(object, normalization = "LibrarySizeNormalization", IsImputation = FALSE, seed = 123)
+object <- ProcessData(object, normalization = "cpm", IsImputation = FALSE, seed = 123)
 ```
 
 
